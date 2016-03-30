@@ -23,32 +23,44 @@ public class SoundsController : MonoBehaviour
 			return _Instance;
 		}
 	}
-    
+
+    void Awake()
+    {
+        if(_Instance!=null && _Instance!=this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 	//initialization all the sound effects
 	void Start ()
 	{
 		sounds = Resources.LoadAll ("Sounds", typeof(AudioClip));
 		audioSource = GetComponents<AudioSource> ();
-
-		//for debuggin only
-		//for (int i=0;i<sounds.Length;i++)
-		//{
-		//Debug.Log(sounds[i].name+"\n");
-		//}    
-	}
+        bgMusic.Play();
+        //for debuggin only
+        //for (int i=0;i<sounds.Length;i++)
+        //{
+        //Debug.Log(sounds[i].name+"\n");
+        //}    
+    }
 
 	void Update ()
 	{
-		if (OfflineManager.Instance.currentState == GameState.Playing && !bgMusic.isPlaying)
-		{
-			//Debug.Log ("playing");
-			bgMusic.Play ();
-		}
-		else if (OfflineManager.Instance.currentState != GameState.Playing && bgMusic.isPlaying)
-		{
-			//Debug.Log ("not playing");
-			bgMusic.Stop ();
-		}
+		//if (OfflineManager.Instance.currentState == GameState.Playing && !bgMusic.isPlaying)
+		//{
+		//	//Debug.Log ("playing");
+		//	bgMusic.Play ();
+		//}
+		//else if (OfflineManager.Instance.currentState != GameState.Playing && bgMusic.isPlaying)
+		//{
+		//	//Debug.Log ("not playing");
+		//	bgMusic.Stop ();
+		//}
 	}
 	//call this function with a parameter of the sound name as in resource folder
 	public void PlaySoundFX (string sfxName, float vol)
