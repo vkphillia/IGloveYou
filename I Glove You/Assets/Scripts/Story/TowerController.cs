@@ -48,7 +48,7 @@ public class TowerController : MonoBehaviour
     {
         //SceneManager.LoadScene("Tutorial");
         //async = SceneManager.LoadSceneAsync("Tutorial");
-        StartCoroutine(LoadingScene("Tutorial"));
+        StartCoroutine(LoadingScene("0th challenge"));
     }
 
     //for loading effect

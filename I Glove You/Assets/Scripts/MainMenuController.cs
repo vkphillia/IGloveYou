@@ -14,8 +14,10 @@ public class MainMenuController : MonoBehaviour
 	public static MainMenuController _Instance = null;
 
 	//property to get instance
-	public static MainMenuController Instance {
-		get {
+	public static MainMenuController Instance
+    {
+		get
+        {
 			//if we do not have Instance yet
 			if (_Instance == null)
 			{
@@ -26,6 +28,11 @@ public class MainMenuController : MonoBehaviour
 	}
 
 	private AsyncOperation async;
+
+    void Start()
+    {
+        StartCoroutine(LoadingMyScene());
+    }
 
 	public void Offline ()
 	{
@@ -43,7 +50,19 @@ public class MainMenuController : MonoBehaviour
        
 	}
 
-	IEnumerator LoadingScene (string sceneName)
+    IEnumerator LoadingMyScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        float speed = 1;
+
+        while (canvas.alpha < 1)
+        {
+            canvas.alpha += speed * Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadingScene (string sceneName)
 	{
 		float speed = 1;
         
