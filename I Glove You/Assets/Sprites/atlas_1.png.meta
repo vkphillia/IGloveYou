@@ -1,0 +1,376 @@
+fileFormatVersion: 2
+guid: acff5652095084fdbaad5736faf92469
+timeCreated: 1459290584
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BG
+    21300002: Life_Icon
+    21300004: Win_Icon
+    21300006: Timer_Icon
+    21300008: Punch_Effect
+    21300010: Health_UI_BG
+    21300012: Fighter_4
+    21300014: Timer_UI_BG
+    21300016: Fighter_1
+    21300018: Fighter_5
+    21300020: Fighter_2
+    21300022: Fighter_6
+    21300024: Fighter_3
+    21300026: life_icon
+    21300028: timer_icon
+    21300030: volume_close
+    21300032: achiement_icon
+    21300034: credit_icon
+    21300036: effect
+    21300038: volume_on
+    21300040: Button_1
+    21300042: Button_2
+    21300044: Button_3
+    21300046: white_image
+    21300048: Button_4
+    21300050: Button_5
+    21300052: character1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: life_icon
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 954
+        width: 55
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26.5, y: 24.5}
+        - {x: -27.5, y: 18.5}
+        - {x: -27.5, y: -7.5}
+        - {x: -18.5, y: -15.5}
+        - {x: -5.5, y: -24.5}
+        - {x: 8.5, y: -24.5}
+        - {x: 27.5, y: -6.5}
+        - {x: 27.5, y: 18.5}
+        - {x: 17.5, y: 24.5}
+    - name: timer_icon
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 954
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 23}
+        - {x: -23, y: -23}
+        - {x: 23, y: -23}
+        - {x: 23, y: 23}
+    - name: volume_close
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 916
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3.5, y: 36}
+        - {x: -3.5, y: -36}
+        - {x: 10.5, y: -36}
+        - {x: 37.5, y: -19}
+        - {x: 37.5, y: 24}
+        - {x: 7.5, y: 36}
+      - - {x: -34.5, y: 18}
+        - {x: -34.5, y: -15}
+        - {x: -2.5, y: -15}
+        - {x: -2.5, y: 18}
+    - name: achiement_icon
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 954
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 16}
+        - {x: -20.5, y: -6}
+        - {x: -18.5, y: -16}
+        - {x: 15.5, y: -16}
+        - {x: 20.5, y: 4}
+        - {x: 20.5, y: 16}
+    - name: credit_icon
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 913
+        width: 80
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: 45}
+        - {x: -18, y: 45}
+        - {x: -40, y: 23}
+        - {x: -40, y: -40}
+        - {x: 39, y: -40}
+        - {x: 40, y: -37}
+        - {x: 40, y: 22}
+        - {x: 29, y: 44}
+      - - {x: -16, y: -6}
+        - {x: -18, y: -8}
+        - {x: -18, y: -14}
+        - {x: -16, y: -16}
+        - {x: -5, y: -16}
+        - {x: -3, y: -14}
+        - {x: -3, y: -8}
+        - {x: -5, y: -6}
+      - - {x: -8, y: 31}
+        - {x: -8, y: 29}
+        - {x: -7, y: 15}
+        - {x: -6, y: 13}
+        - {x: 16, y: 13}
+        - {x: 16, y: 31}
+    - name: effect
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 918
+        width: 111
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -55.5, y: 26}
+        - {x: -55.5, y: -4}
+        - {x: -23.5, y: -24}
+        - {x: -19.5, y: -26}
+        - {x: 45.5, y: -26}
+        - {x: 55.5, y: -9}
+        - {x: 55.5, y: 26}
+      - - {x: -37.5, y: 26}
+        - {x: -37.5, y: 19}
+        - {x: -35.5, y: 17}
+        - {x: -29.5, y: 17}
+        - {x: -27.5, y: 19}
+        - {x: -27.5, y: 26}
+    - name: volume_on
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 820
+        width: 88
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 34.5}
+        - {x: 3, y: -34.5}
+        - {x: 22, y: -34.5}
+        - {x: 44, y: -22.5}
+        - {x: 44, y: 20.5}
+        - {x: 16, y: 34.5}
+      - - {x: -40, y: 29.5}
+        - {x: -40, y: -23.5}
+        - {x: -34, y: -28.5}
+        - {x: -22, y: -28.5}
+        - {x: -22, y: 29.5}
+      - - {x: -21, y: 24.5}
+        - {x: -27, y: 21.5}
+        - {x: -27, y: -16.5}
+        - {x: -25, y: -24.5}
+        - {x: -9, y: -24.5}
+        - {x: -9, y: 24.5}
+      - - {x: -10, y: 16.5}
+        - {x: -15, y: 11.5}
+        - {x: -15, y: -10.5}
+        - {x: -10, y: -15.5}
+        - {x: -1, y: -15.5}
+        - {x: -1, y: 16.5}
+    - name: Button_1
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 820
+        width: 88
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44, y: 37}
+        - {x: -44, y: -29}
+        - {x: -43, y: -37}
+        - {x: 44, y: -37}
+        - {x: 44, y: 37}
+    - name: Button_2
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 820
+        width: 163
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -76.5, y: 35}
+        - {x: -81.5, y: 30}
+        - {x: -81.5, y: -35}
+        - {x: 81.5, y: -35}
+        - {x: 81.5, y: 35}
+    - name: Button_3
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 726
+        width: 163
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -76.5, y: 35}
+        - {x: -81.5, y: 30}
+        - {x: -81.5, y: -35}
+        - {x: 81.5, y: -35}
+        - {x: 81.5, y: 35}
+    - name: white_image
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 523
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61, y: 60}
+        - {x: -61, y: -60}
+        - {x: 61, y: -60}
+        - {x: 61, y: 60}
+    - name: Button_4
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 620
+        width: 345
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 160.5, y: 41.5}
+        - {x: -161.5, y: 41.5}
+        - {x: -162.5, y: 40.5}
+        - {x: -172.5, y: 28.5}
+        - {x: -172.5, y: -24.5}
+        - {x: -162.5, y: -24.5}
+        - {x: -162.5, y: -41.5}
+        - {x: 162.5, y: -41.5}
+        - {x: 172.5, y: -30.5}
+        - {x: 172.5, y: 29.5}
+        - {x: 160.5, y: 29.5}
+    - name: Button_5
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 523
+        width: 345
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 160.5, y: 41.5}
+        - {x: -161.5, y: 41.5}
+        - {x: -162.5, y: 40.5}
+        - {x: -172.5, y: 28.5}
+        - {x: -172.5, y: -24.5}
+        - {x: -162.5, y: -24.5}
+        - {x: -162.5, y: -41.5}
+        - {x: 162.5, y: -41.5}
+        - {x: 172.5, y: -30.5}
+        - {x: 172.5, y: 29.5}
+        - {x: 160.5, y: 29.5}
+    - name: character1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 879
+        width: 124
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48, y: 50.5}
+        - {x: -50, y: 49.5}
+        - {x: -56, y: 40.5}
+        - {x: -56, y: -7.5}
+        - {x: -55, y: -10.5}
+        - {x: -36, y: -49.5}
+        - {x: 23, y: -49.5}
+        - {x: 47, y: 3.5}
+        - {x: 47, y: 29.5}
+        - {x: 43, y: 50.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

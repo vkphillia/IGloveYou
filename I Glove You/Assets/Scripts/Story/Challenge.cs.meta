@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c40898fe2a2d744b197800a5d957191a
+timeCreated: 1458807259
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - myEnemySprite: {instanceID: 0}
+  - myButton: {instanceID: 0}
+  - myEnemy: {fileID: 11467146, guid: 7bfb2876d517046f695000f99e57f78b, type: 2}
+  - myPlayer: {fileID: 11402578, guid: d76bbd3b085d3406991b10f7e8c0bb12, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

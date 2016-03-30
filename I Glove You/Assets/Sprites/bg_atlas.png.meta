@@ -1,0 +1,91 @@
+fileFormatVersion: 2
+guid: e4bc4a54fbc420942b988627e147a39f
+timeCreated: 1459277749
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: bg_ingame
+    21300002: main menu bg
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: bg_ingame
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 52
+        width: 663
+        height: 947
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -331.5, y: 473.5}
+        - {x: -331.5, y: -473.5}
+        - {x: 331.5, y: -473.5}
+        - {x: 331.5, y: 473.5}
+    - name: main menu bg
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 384
+        width: 323
+        height: 575
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -159.5, y: 286.5}
+        - {x: -161.5, y: 284.5}
+        - {x: -161.5, y: -284.5}
+        - {x: 161.5, y: -284.5}
+        - {x: 161.5, y: 284.5}
+        - {x: 159.5, y: 286.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
