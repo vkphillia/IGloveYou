@@ -7,6 +7,13 @@ public class PowerUp : MonoBehaviour
 	//This is a base call and all Power ups need to be derived from this class
 
 	public int weight;
+	public ParticleSystem myPS;
+
+	public virtual void OnEnable ()
+	{
+		myPS.gameObject.SetActive (true);
+
+	}
 
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
@@ -54,6 +61,7 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void DeactivatePU ()
 	{
+		
 		OfflineManager.Instance.PUPicked = true;
 		gameObject.SetActive (false);
 	}

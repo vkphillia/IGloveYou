@@ -29,6 +29,8 @@ public class AirStrikePU : PowerUp
 	{
 		if (!active)
 		{
+			myPS.gameObject.SetActive (false);
+
 			active = true;
 			StartCoroutine (StrikeNow ());
 		}
@@ -38,6 +40,8 @@ public class AirStrikePU : PowerUp
 	{
 		if (!active)
 		{
+			myPS.gameObject.SetActive (false);
+
 			active = true;
 			StartCoroutine (StrikeNow ());
 		}

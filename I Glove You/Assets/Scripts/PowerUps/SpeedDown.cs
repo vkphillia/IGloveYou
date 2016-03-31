@@ -12,13 +12,18 @@ public class SpeedDown : PowerUp
 	private Drain_FX Drain_Obj;
 
 
+
 	public override void Player1Picked ()
 	{
+		myPS.gameObject.SetActive (false);
+
 		StartCoroutine (SpeedDrain (OfflineManager.Instance.PlayerHolder2));
 	}
 
 	public override void Player2Picked ()
 	{
+		myPS.gameObject.SetActive (false);
+
 		StartCoroutine (SpeedDrain (OfflineManager.Instance.PlayerHolder1));
 	}
 

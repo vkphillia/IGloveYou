@@ -12,7 +12,7 @@ public class Drain_FX : MonoBehaviour
 
 	IEnumerator RemovePs ()
 	{
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (4f);
 		transform.parent = null;
 		GameObjectPool.GetPool ("DrainPool").ReleaseInstance (transform);
 	}

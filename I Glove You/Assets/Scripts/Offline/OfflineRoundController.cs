@@ -14,6 +14,10 @@ public class OfflineRoundController : MonoBehaviour
 	public P2HUD HUDP2;
 
 
+	void OnEnable ()
+	{
+		SoundsController.Instance.bgMenuMusic.Stop ();
+	}
 
 	void Awake ()
 	{
@@ -67,6 +71,7 @@ public class OfflineRoundController : MonoBehaviour
 		yield return new WaitForSeconds (1f);
 		myRoundTextAnim.Play ("Round_Hide");
 		OfflineManager.Instance.currentState = GameState.Playing;
+		SoundsController.Instance.bgMenuMusic.Play ();
 		yield return new WaitForSeconds (1f);
 		gameObject.SetActive (false);
 	}
@@ -134,7 +139,8 @@ public class OfflineRoundController : MonoBehaviour
 		StartCoroutine (HUDP1.GoDown ());
 		StartCoroutine (HUDP2.GoDown ());
 		OfflineManager.Instance.NewMatchStart ();
-		UI.SetActive (true);
+		SceneManager.LoadScene ("offline menu");
+		//UI.SetActive (true);
 
 		//SceneManager.LoadScene ("offline menu");
 	}

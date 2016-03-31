@@ -15,6 +15,8 @@ public class WalkingBombBlastCol : MonoBehaviour
 	{
 		if (other.gameObject.layer == 8 && OfflineManager.Instance.PlayerHolder1.hasGlove)
 		{
+			GetComponent<CircleCollider2D> ().enabled = false;
+			GetComponent<SpriteRenderer> ().enabled = false;
 			StopCoroutine (myParentBomb.ActivateBomb (OfflineManager.Instance.PlayerHolder1));
 			StartCoroutine (myParentBomb.BlastNow (OfflineManager.Instance.PlayerHolder1));
 			OfflineManager.Instance.PlayerHolder1.AlterHealth (myParentBomb.damageByBlast);
@@ -24,6 +26,8 @@ public class WalkingBombBlastCol : MonoBehaviour
 		}
 		else if (other.gameObject.layer == 10 && OfflineManager.Instance.PlayerHolder2.hasGlove)
 		{
+			GetComponent<CircleCollider2D> ().enabled = false;
+			GetComponent<SpriteRenderer> ().enabled = false;
 			StopCoroutine (myParentBomb.ActivateBomb (OfflineManager.Instance.PlayerHolder2));
 			StartCoroutine (myParentBomb.BlastNow (OfflineManager.Instance.PlayerHolder2));
 			OfflineManager.Instance.PlayerHolder2.AlterHealth (myParentBomb.damageByBlast);

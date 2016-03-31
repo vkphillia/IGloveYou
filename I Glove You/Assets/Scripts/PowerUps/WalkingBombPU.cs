@@ -13,35 +13,40 @@ public class WalkingBombPU : PowerUp
 	private Vector3 relativePos;
 	private float angle;
 	private bool active;
+	private bool blasted;
 
-	void OnEnable ()
+	public override void OnEnable ()
 	{
 		GetComponent<SpriteRenderer> ().enabled = true;
 		GetComponent<CircleCollider2D> ().enabled = true;
 		myBlastCol.GetComponent<SpriteRenderer> ().enabled = false;
 		myBlastCol.GetComponent<CircleCollider2D> ().enabled = false;
+		base.OnEnable ();
 
 	}
 
 	void Update ()
 	{
 		//find other player and go towards it
-		if (active)
+		if (active && !blasted)
 		{
 			if (OfflineManager.Instance.currentState == GameState.Playing)
 			{
+
 				AIFollow ();
 				transform.position = new Vector3 (Mathf.Clamp (transform.position.x, -2.75f, 2.75f), Mathf.Clamp (transform.position.y, -3.7f, 3.7f), 0);
 				transform.position += transform.up * Time.deltaTime * mySpeed;
 
 			}
 		}
+
 	}
 
 	public override void Player1Picked ()
 	{
 		if (!active)
 		{
+			myPS.gameObject.SetActive (false);
 			active = true;
 			StartCoroutine (ActivateBomb (OfflineManager.Instance.PlayerHolder1));
 		}
@@ -51,6 +56,7 @@ public class WalkingBombPU : PowerUp
 	{
 		if (!active)
 		{
+			myPS.gameObject.SetActive (false);
 			active = true;
 			StartCoroutine (ActivateBomb (OfflineManager.Instance.PlayerHolder2));
 		}
@@ -77,8 +83,8 @@ public class WalkingBombPU : PowerUp
 
 	public IEnumerator ActivateBomb (PlayerHolderController p)
 	{
-		//bomb pickup sound
-		//SoundsController.Instance.PlaySoundFX ("BombWalk", 1.0f);
+		//loop this please until blast
+		SoundsController.Instance.walkingBomb.Play (); 
 		//bomb ticking sound goes here
 
 		myBlastCol.GetComponent<CircleCollider2D> ().enabled = true;
@@ -94,18 +100,21 @@ public class WalkingBombPU : PowerUp
 	//explosion stuff goes here
 	public IEnumerator BlastNow (PlayerHolderController p)
 	{
-		active = false;
-		//SoundsController.Instance.StopSoundFX ("BombWalk", 0f);
+		blasted = true;
+		SoundsController.Instance.walkingBomb.Pause (); 
 		SoundsController.Instance.PlaySoundFX ("Blast", 1.0f);
 		GetComponent<SpriteRenderer> ().enabled = false;
 		myBlastCol.GetComponent<SpriteRenderer> ().enabled = true;
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (.5f);
+		active = false;
+		blasted = false;
 		DeactivatePU ();
 
 	}
 
 	public override void DeactivatePU ()
 	{
+
 		transform.rotation = Quaternion.Euler (0, 0, 0);
 		active = false;
 		//disable sprite and blast collider before disabling gameobject

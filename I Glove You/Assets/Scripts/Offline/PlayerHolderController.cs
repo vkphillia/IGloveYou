@@ -54,11 +54,14 @@ public class PlayerHolderController : MonoBehaviour
 	//new health meter
 	public Image myHealthBar;
 
-
+	//new punch anim
+	public Sprite myPunchSprite;
+	private Sprite myOriginalSprite;
 
 	void Start ()
 	{
 		mySprite = GetComponent<SpriteRenderer> ();
+		myOriginalSprite = mySprite.sprite;
 		myHealth = OfflineManager.Instance.MaxHealth;
 		mySpeed = OfflineManager.Instance.MaxSpeed;
 		myHealthText_HUD.text = myHealth.ToString ();
@@ -69,7 +72,7 @@ public class PlayerHolderController : MonoBehaviour
 	{
 		if (OfflineManager.Instance.currentState == GameState.Playing)
 		{
-			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, -2.75f, 2.75f), Mathf.Clamp (transform.position.y, -4.4f, 4.4f), 0);
+			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, -2.7f, 2.7f), Mathf.Clamp (transform.position.y, -3.8f, 3.7f), 0);
 
 
 			if (!hit && !hitter && !PUHitter)
@@ -197,7 +200,16 @@ public class PlayerHolderController : MonoBehaviour
 
 	IEnumerator PlayPunchAnim ()
 	{
-		myPunchAnim.Play ("Punch_Hit");
+		int randPunch = Random.Range (0, 2);
+		if (randPunch == 0)
+		{
+			myPunchAnim.Play ("Punch_Hit");
+		
+		}
+		else
+		{
+			myPunchAnim.Play ("Punch_Hit2");
+		}
 		yield return new WaitForSeconds (.5f);
 		myPunchAnim.Play ("Punch_Idle");
 	}
@@ -206,6 +218,7 @@ public class PlayerHolderController : MonoBehaviour
 	public void LoseGlove ()
 	{
 		hasGlove = false;
+		mySprite.sprite = myOriginalSprite;
 		myPunchAnim.gameObject.SetActive (false);
 	}
 
@@ -214,7 +227,9 @@ public class PlayerHolderController : MonoBehaviour
 	{
 		SoundsController.Instance.PlaySoundFX ("GlovePick", 1.0f);
 		hasGlove = true;
+		mySprite.sprite = myPunchSprite;
 		myPunchAnim.gameObject.SetActive (true);
+		myPunchAnim.Play ("Punch_Idle");
 	}
 
 	//increase or decreases the health of the player based on the amount
@@ -228,7 +243,6 @@ public class PlayerHolderController : MonoBehaviour
 			FT_Obj.transform.position = myFlyingTextSpawnPoint.position;
 			FT_Obj.transform.rotation = myFlyingTextSpawnPoint.rotation;
 			//new health bar
-
 
 			if (amount > 0)
 			{
