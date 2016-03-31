@@ -19,27 +19,27 @@ public class TutorialManager : MonoBehaviour
 	
 	IEnumerator StartTutorial()
     {
-        yield return new WaitForSeconds(0.5f);
-        Color temp = Intro.GetComponent<SpriteRenderer>().color;
-        float alpha=0;
-        while(alpha<1)
-        {
-            temp.a = alpha;
-            Intro.GetComponent<SpriteRenderer>().color = temp;
-            alpha+=0.1f;
-            yield return new WaitForSeconds(0.1f);
-        }
+        //yield return new WaitForSeconds(0.5f);
+        //Color temp = Intro.GetComponent<SpriteRenderer>().color;
+        //float alpha=0;
+        //while(alpha<1)
+        //{
+        //    temp.a = alpha;
+        //    Intro.GetComponent<SpriteRenderer>().color = temp;
+        //    alpha+=0.1f;
+        //    yield return new WaitForSeconds(0.1f);
+        //}
 
-        Intro.GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(5f);
+        //Intro.GetComponent<Animator>().enabled = true;
+        //yield return new WaitForSeconds(5f);
         
-        while (alpha > 0)
-        {
-            temp.a = alpha;
-            Intro.GetComponent<SpriteRenderer>().color = temp;
-            alpha -= 0.1f;
-            yield return new WaitForSeconds(0.1f);
-        }
+        //while (alpha > 0)
+        //{
+        //    temp.a = alpha;
+        //    Intro.GetComponent<SpriteRenderer>().color = temp;
+        //    alpha -= 0.1f;
+        //    yield return new WaitForSeconds(0.1f);
+        //}
         Intro.SetActive(false);
         yield return new WaitForSeconds(1f);
 
