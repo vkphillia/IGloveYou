@@ -98,7 +98,7 @@ public class Challenge1 : Challenge
 		player.move = false;
 		Challenge.noOfEnemyAlive = 0;//reseting
 
-		filler.text = "You killed " + (enemyCount - 1).ToString () + " enemy";
+		filler.text = "You killed " + (enemyCount - 1).ToString () + " enemy\n\nTutorial Completed";
 		UI.SetActive (true);//setting challenge complete buttons to active
 		yield return new WaitForSeconds (1f);
         
