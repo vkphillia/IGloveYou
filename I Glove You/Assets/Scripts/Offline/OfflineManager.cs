@@ -107,7 +107,9 @@ public class OfflineManager : MonoBehaviour
 	//sets the player intital position and calls ShowRoundPanel()
 	void Start ()
 	{
-		P1ReadtText.text = "Re-Match";
+        SoundsController.Instance.PlayCrowdSound();
+
+        P1ReadtText.text = "Re-Match";
 		P2ReadtText.text = "Re-Match";
 
 

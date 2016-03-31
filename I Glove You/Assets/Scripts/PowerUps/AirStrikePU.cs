@@ -49,7 +49,7 @@ public class AirStrikePU : PowerUp
 
 	IEnumerator StrikeNow ()
 	{
-		SoundsController.Instance.PlaySoundFX ("AirStrike", 1.0f);
+		SoundsController.Instance.PlaySoundFX ("AirStrike", 0.6f);
 		GetComponent<SpriteRenderer> ().enabled = false;
 		GetComponent<CircleCollider2D> ().enabled = false;
 		for (int i = 0; i < noOfStrikes; i++)

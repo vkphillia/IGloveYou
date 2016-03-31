@@ -102,7 +102,7 @@ public class WalkingBombPU : PowerUp
 	{
 		blasted = true;
 		SoundsController.Instance.walkingBomb.Pause (); 
-		SoundsController.Instance.PlaySoundFX ("Blast", 1.0f);
+		SoundsController.Instance.PlaySoundFX ("Blast", 0.5f);
 		GetComponent<SpriteRenderer> ().enabled = false;
 		myBlastCol.GetComponent<SpriteRenderer> ().enabled = true;
 		yield return new WaitForSeconds (.5f);

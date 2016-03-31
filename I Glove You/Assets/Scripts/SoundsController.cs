@@ -8,6 +8,7 @@ public class SoundsController : MonoBehaviour
     public AudioSource bgMusic;
     public AudioSource bgMenuMusic;
     public AudioSource walkingBomb;
+    public AudioSource crowd;
 
     private Object[] sounds;
 	private AudioSource[] audioSource = new AudioSource[5];
@@ -76,6 +77,14 @@ public class SoundsController : MonoBehaviour
 		//}
 	}
 	
+    public void PlayCrowdSound()
+    {
+        if(!mute)
+        {
+            crowd.Play();
+        }
+    }
+
     //call this function with a parameter of the sound name as in resource folder
 	public void PlaySoundFX (string sfxName, float vol)
 	{
