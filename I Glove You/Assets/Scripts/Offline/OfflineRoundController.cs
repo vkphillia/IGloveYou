@@ -16,7 +16,7 @@ public class OfflineRoundController : MonoBehaviour
 
 	void OnEnable ()
 	{
-		SoundsController.Instance.bgMenuMusic.Stop ();
+		//SoundsController.Instance.bgMenuMusic.Stop ();
 	}
 
 	void Awake ()
