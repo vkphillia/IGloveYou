@@ -19,69 +19,68 @@ public class StoryPUController : MonoBehaviour
 	void Awake ()
 	{
 		// Table to Store probability of PUS
-		CreateWeightTable ();
+		//CreateWeightTable ();
 	}
 
 	void Start ()
 	{
 
-		if (Challenge.Instance.PUOn)
-		{
-			Challenge.Instance.PUPicked = true;
+		//if (Challenge.Instance.PUOn)
+		//{
+		//	Challenge.Instance.PUPicked = true;
 		
-		}
-		else
-		{
-			Challenge.Instance.PUPicked = false;
-		}
+		//}
+		//else
+		//{
+		//	Challenge.Instance.PUPicked = false;
+		//}
 		
 
-		//Ensure no gloves are spawned if GloveOff
-		if (Challenge.Instance.GloveOn)
-		{
-			Challenge.SpwanFirstGlove += Spawn;
-		}
-		else
-		{
-			Challenge.Instance.glovePicked = false;
-		}
+		////Ensure no gloves are spawned if GloveOff
+		//if (Challenge.Instance.GloveOn)
+		//{
+		//	Challenge.SpwanFirstGlove += Spawn;
+		//}
+		//else
+		//{
+		//	Challenge.Instance.glovePicked = false;
+		//}
 
 
 	}
 
 	void Update ()
 	{
-		if (GameTimer.Instance.timerStarted)
-		{
-			if (Challenge.Instance.PUPicked)
-			{
-				Debug.Log ("PUPicked is true in update");
-				StartCoroutine (SpawnPUCoroutine ());
-			}
-			if (Challenge.Instance.glovePicked)
-			{
-				StartCoroutine (SpawnGloveCoroutine ());
-			}
+		//if (GameTimer.Instance.timerStarted)
+		//{
+		//	if (Challenge.Instance.PUPicked)
+		//	{
+		//		StartCoroutine (SpawnPUCoroutine ());
+		//	}
+		//	if (Challenge.Instance.glovePicked)
+		//	{
+		//		StartCoroutine (SpawnGloveCoroutine ());
+		//	}
 
-		}
-		else
-		{
-			StopCoroutine (SpawnPUCoroutine ());
-			StopCoroutine (SpawnGloveCoroutine ());
-		}
+		//}
+		//else
+		//{
+		//	StopCoroutine (SpawnPUCoroutine ());
+		//	StopCoroutine (SpawnGloveCoroutine ());
+		//}
 	}
 
 	//spawn power ups code
 	public IEnumerator SpawnPUCoroutine ()
 	{
-		Debug.Log ("Now spawning PU");
-	
-		Challenge.Instance.PUPicked = false;
+        //Debug.Log ("Now spawning PU");
+
+        GameManager.Instance.PUPicked = false;
 		int PUIndex = GetPUIndex ();
 		PU = PUList [PUIndex];
 
 		yield return new WaitForSeconds (1f);
-		Debug.Log ("Now Activating PU");
+		//Debug.Log ("Now Activating PU");
 		PU.SetActive (true);
 		SpawnAnything (PU);
 	}

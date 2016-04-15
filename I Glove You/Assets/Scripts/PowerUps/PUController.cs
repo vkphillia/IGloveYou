@@ -18,37 +18,87 @@ public class PUController : MonoBehaviour
 
 	void Awake ()
 	{
-		// Table to Store probability of PUS
-		CreateWeightTable ();
-        GameManager.SpwanFirstGlove += Spawn;
-	}
+        if(GameManager.Instance.currentMode== GameMode.TwoPlayer)
+        {   
+            GameManager.SpwanFirstGlove += Spawn;
+        }
+
+        //common for both mode
+        // Table to Store probability of PUS
+        CreateWeightTable();
+    }
 
 	void Start ()
 	{
-		GameManager.Instance.PUPicked = true;
+        if(GameManager.Instance.currentMode== GameMode.TwoPlayer)
+        {
+            GameManager.Instance.PUPicked = true;
+        }
+        //single player mode
+        else if(GameManager.Instance.currentMode==GameMode.SinglePlayer)
+        {
+            if (Challenge.Instance.PUOn)
+            {
+                GameManager.Instance.PUPicked = true;
+            }
+            else
+            {
+                GameManager.Instance.PUPicked = false;
+            }
+
+
+            //Ensure no gloves are spawned if GloveOff
+            if (Challenge.Instance.GloveOn)
+            {
+                GameManager.SpwanFirstGlove += Spawn;
+            }
+            else
+            {
+                GameManager.Instance.glovePicked = false;
+            }
+        }
 
 	}
 
 	void Update ()
 	{
-		if (GameManager.Instance.currentState == GameState.Playing)
-		{
-			if (GameManager.Instance.PUPicked)
-			{
-				StartCoroutine (SpawnPUCoroutine ());
-			}
-			if (GameManager.Instance.glovePicked)
-			{
-				StartCoroutine (SpawnGloveCoroutine ());
-			}
+        if(GameManager.Instance.currentMode==GameMode.TwoPlayer)
+        {
+            if (GameManager.Instance.currentState == GameState.Playing)
+            {
+                if (GameManager.Instance.PUPicked)
+                {
+                    StartCoroutine(SpawnPUCoroutine());
+                }
+                if (GameManager.Instance.glovePicked)
+                {
+                    StartCoroutine(SpawnGloveCoroutine());
+                }
 
-		}
-		else
-		{
-            //why???
-			StopCoroutine (SpawnPUCoroutine ());
-			StopCoroutine (SpawnGloveCoroutine ());
-		}
+            }
+        }
+        //single player mode code
+        else if(GameManager.Instance.currentMode == GameMode.SinglePlayer)
+        {
+            if (GameTimer.Instance.timerStarted)
+            {
+                if (GameManager.Instance.PUPicked)
+                {
+                    StartCoroutine(SpawnPUCoroutine());
+                }
+                if (GameManager.Instance.glovePicked)
+                {
+                    StartCoroutine(SpawnGloveCoroutine());
+                }
+            }
+        }
+		
+		//else
+		//{
+  //          //why???
+		//	StopCoroutine (SpawnPUCoroutine ());
+		//	StopCoroutine (SpawnGloveCoroutine ());
+		//}
 	}
 
 	//spawn power ups code

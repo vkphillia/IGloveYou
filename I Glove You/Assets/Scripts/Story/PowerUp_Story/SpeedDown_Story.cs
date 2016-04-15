@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedDown_Story : PowerUp_Story
+public class SpeedDown_Story : PowerUp
 {
 
 	public float myTime;
@@ -12,12 +12,12 @@ public class SpeedDown_Story : PowerUp_Story
 	//private Drain_FX Drain_Obj;
 
 
-	public override void PlayerPicked ()
+	public override void Player1Picked()
 	{
 		StartCoroutine (SpeedDrainEnemy ());
 	}
 
-	public override void EnemyPicked ()
+	public override void Player2Picked()
 	{
 		StartCoroutine (SpeedDrainPlayer ());
 	}

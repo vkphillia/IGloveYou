@@ -34,19 +34,28 @@ public class MainMenuController : MonoBehaviour
         StartCoroutine(LoadingMyScene());
     }
 
-	public void Offline ()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            back = true;
+            backText.gameObject.SetActive(true);
+            StartCoroutine(ChkForDoubleBack());
+        }
+    }
+
+    public void Offline ()
 	{
-		//SceneManager.LoadScene ("offline menu");
-		Debug.Log ("clicked");
-		//async = SceneManager.LoadSceneAsync("offline menu");
-		//async.allowSceneActivation = false;
-		StartCoroutine (LoadingScene ("offline menu"));
+        GameManager.Instance.currentMode = GameMode.TwoPlayer;
+
+        StartCoroutine (LoadingScene ("offline menu"));
 	}
 
 	public void Story ()
 	{
-		StartCoroutine (LoadingScene ("story main"));
-		//SceneManager.LoadScene("story main");
+        GameManager.Instance.currentMode = GameMode.SinglePlayer;
+
+        StartCoroutine (LoadingScene ("story main"));
        
 	}
 
@@ -73,17 +82,7 @@ public class MainMenuController : MonoBehaviour
 		}
 		SceneManager.LoadScene (sceneName);
 	}
-
-	void Update ()
-	{
-		if (Input.GetKeyDown (KeyCode.Escape))
-		{
-			back = true;
-			backText.gameObject.SetActive (true);
-			StartCoroutine (ChkForDoubleBack ());
-		}
-	}
-
+    
 	IEnumerator ChkForDoubleBack ()
 	{
 		if (Input.GetKeyDown (KeyCode.Escape) && back)

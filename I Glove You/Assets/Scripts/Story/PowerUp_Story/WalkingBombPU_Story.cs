@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WalkingBombPU_Story : PowerUp_Story
+public class WalkingBombPU_Story : PowerUp
 {
 	public int damageByBlast;
 	public float myTime;
@@ -29,7 +29,7 @@ public class WalkingBombPU_Story : PowerUp_Story
 		}
 	}
 
-	public override void PlayerPicked ()
+	public override void Player1Picked()
 	{
 		if (!active)
 		{
@@ -38,7 +38,7 @@ public class WalkingBombPU_Story : PowerUp_Story
 		}
 	}
 
-	public override void EnemyPicked ()
+	public override void Player2Picked()
 	{
 		if (!active)
 		{
@@ -48,7 +48,7 @@ public class WalkingBombPU_Story : PowerUp_Story
 	}
 
 
-	public override void PlayerWithGlovePicked ()
+	public override void Player1WithGlovePicked ()
 	{
 		if (!active)
 		{
@@ -57,7 +57,7 @@ public class WalkingBombPU_Story : PowerUp_Story
 		}
 	}
 
-	public override void EnemyWithGlovePicked ()
+	public override void Player2WithGlovePicked ()
 	{
 		if (!active)
 		{

@@ -11,27 +11,71 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void OnEnable ()
 	{
+        //assign it in story mode also
 		myPS.gameObject.SetActive (true);
 
 	}
 
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.layer == 8 && !OfflineManager.Instance.PlayerHolder1.hasGlove)
+		if (other.gameObject.layer == 8 )
 		{
-			Player1Picked ();
+            if(GameManager.Instance.currentMode==GameMode.TwoPlayer)
+            {
+                if(!OfflineManager.Instance.PlayerHolder1.hasGlove)
+                {
+                    Player1Picked();
+                }
+            }
+            //single player mode
+            else
+            {
+                if (!Challenge.Instance.player.hasGlove)
+                {
+                    Player1Picked();
+                }
+                else if(Challenge.Instance.player.hasGlove)
+                {
+                    Player1WithGlovePicked();
+                }
+            }
 		}
-		else if (other.gameObject.layer == 10 && !OfflineManager.Instance.PlayerHolder2.hasGlove)
+		else if (other.gameObject.layer == 10)
 		{
-			Player2Picked ();
+            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+            {
+                if (!OfflineManager.Instance.PlayerHolder2.hasGlove)
+                {
+                    Player2Picked();
+                }
+            }
+            //single player mode
+            else
+            {
+                if (!Challenge.Instance.enemyHolder.enemy.hasGlove)
+                {
+                    Player2Picked();
+                }
+                else if (Challenge.Instance.player.hasGlove)
+                {
+                    Player2WithGlovePicked();
+                }
+            }
+                
 		}
 		else if (other.gameObject.layer == 9)
 		{
-			Player1WithGlovePicked ();
+            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+            {
+                Player1WithGlovePicked();
+            }
 		}
 		else if (other.gameObject.layer == 11)
 		{
-			Player2WithGlovePicked ();
+            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+            {
+                Player2WithGlovePicked();
+            }
 		}
 	}
 
@@ -49,14 +93,29 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void Player1WithGlovePicked ()
 	{
-		OfflineManager.Instance.PlayerHolder1.PunchPUS (this.transform);
-		DeactivatePU ();
+        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+        {
+            OfflineManager.Instance.PlayerHolder1.PunchPUS(this.transform);
+        }
+        else
+        {
+            //Challenge.Instance.player.PunchPUS (this.transform);
+        }
+
+        DeactivatePU ();
 	}
 
 	public virtual void Player2WithGlovePicked ()
 	{
-		OfflineManager.Instance.PlayerHolder2.PunchPUS (this.transform);
-		DeactivatePU ();
+        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+        {
+            OfflineManager.Instance.PlayerHolder2.PunchPUS(this.transform);
+        }
+        else
+        {
+            //Challenge.Instance.enemyHolder.enemy.PunchPUS (this.transform);
+        }
+        DeactivatePU ();
 	}
 
 	public virtual void DeactivatePU ()

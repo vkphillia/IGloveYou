@@ -54,7 +54,7 @@ public class PowerUp_Story : MonoBehaviour
 
 	public virtual void DeactivatePU ()
 	{
-		Challenge.Instance.PUPicked = true;
+		GameManager.Instance.PUPicked = true;
 		gameObject.SetActive (false);
 	}
 

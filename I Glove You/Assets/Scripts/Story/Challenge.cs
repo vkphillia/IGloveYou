@@ -43,8 +43,8 @@ public class Challenge : MonoBehaviour
 	//public Text timerText_HUD;
 	[HideInInspector]
 	public bool glovePicked;
-	[HideInInspector]
-	public bool PUPicked;
+	//[HideInInspector]
+	//public bool PUPicked;
 
 	//Set in inspector for each challenge
 	public int myLevelNum;
