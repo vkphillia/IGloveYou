@@ -61,8 +61,8 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void DeactivatePU ()
 	{
-		
-		OfflineManager.Instance.PUPicked = true;
+
+        GameManager.Instance.PUPicked = true;
 		gameObject.SetActive (false);
 	}
 

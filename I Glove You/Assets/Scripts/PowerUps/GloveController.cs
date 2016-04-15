@@ -23,7 +23,7 @@ public class GloveController : MonoBehaviour
 			OfflineManager.Instance.PlayerHolder1.AddGlove ();
 			OfflineManager.Instance.PlayerHolder2.LoseGlove ();
 
-			OfflineManager.Instance.glovePicked = true;
+            GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 		else if (other.gameObject.layer == 10 && !OfflineManager.Instance.PlayerHolder2.hasGlove)
@@ -31,19 +31,19 @@ public class GloveController : MonoBehaviour
 			OfflineManager.Instance.PlayerHolder1.LoseGlove ();
 			OfflineManager.Instance.PlayerHolder2.AddGlove ();
 
-			OfflineManager.Instance.glovePicked = true;
+            GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 		else if (other.gameObject.layer == 9)
 		{
 			OfflineManager.Instance.PlayerHolder1.PunchPUS (this.transform);
-			OfflineManager.Instance.glovePicked = true;
+            GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 		else if (other.gameObject.layer == 11)
 		{
 			OfflineManager.Instance.PlayerHolder2.PunchPUS (this.transform);
-			OfflineManager.Instance.glovePicked = true;
+            GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 	}

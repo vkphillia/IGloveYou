@@ -114,18 +114,8 @@ public class PlayerControlsUniversal : MonoBehaviour
     
 	void Update ()
 	{
-		//Read This,
-		//this code alone wont give u the hitting effect
-		//you need to add code from PlayerHolderController Update functionm
-		//where based on hit the movement transform vector and speed varies
-		//Read
-		//I am adding code piece by piece so it wont get complicated, I will add those codes too when needed
-		//move player only when challengeControl tells u to
 		if (move)
 		{
-			KeyboardControls ();
-			MobileControls ();
-
 			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, -2.75f, 2.75f), Mathf.Clamp (transform.position.y, -4.34f, 4.34f), 0);
 			if (!hit && !hitter)
 			{
@@ -180,51 +170,5 @@ public class PlayerControlsUniversal : MonoBehaviour
 		GetComponent<SpriteRenderer> ().color = C;
 		yield return new WaitForSeconds (.5f);
 		GetComponent<SpriteRenderer> ().color = Color.white;
-	}
-
-
-
-	//player movement control code start from here..................................................
-	void KeyboardControls ()
-	{
-        
-		if (Input.GetButton ("movez"))
-		{
-			MoveClockWise ();
-		}
-		else if (Input.GetButton ("movex"))
-		{
-			MoveAntiClockWise ();
-		}
-	}
-
-	void MobileControls ()
-	{
-		int count = Input.touchCount;
-		for (int i = 0; i < count; i++)
-		{
-			Touch touch = Input.GetTouch (i);
-
-			if (touch.position.x < Screen.width / 2 && touch.position.y < Screen.height / 2)
-			{
-				MoveClockWise ();
-			}
-
-			if (touch.position.x > Screen.width / 2 && touch.position.y < Screen.height / 2)
-			{
-				MoveAntiClockWise ();
-			}
-		}
-	}
-
-
-	void MoveClockWise ()
-	{
-		transform.Rotate (0, 0, 5);
-	}
-
-	void MoveAntiClockWise ()
-	{
-		transform.Rotate (0, 0, -5);
 	}
 }

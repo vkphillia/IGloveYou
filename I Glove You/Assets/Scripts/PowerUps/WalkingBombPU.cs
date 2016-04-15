@@ -30,7 +30,7 @@ public class WalkingBombPU : PowerUp
 		//find other player and go towards it
 		if (active && !blasted)
 		{
-			if (OfflineManager.Instance.currentState == GameState.Playing)
+			if (GameManager.Instance.currentState == GameState.Playing)
 			{
 
 				AIFollow ();

@@ -29,15 +29,15 @@ public class OfflineRoundController : MonoBehaviour
 	{
 		gameObject.SetActive (true);
 
-		if (OfflineManager.Instance.currentState == GameState.RoundStart)
+		if (GameManager.Instance.currentState == GameState.RoundStart)
 		{
 			StartCoroutine (HideRoundStartText ());
 		}
-		else if (OfflineManager.Instance.currentState == GameState.RoundOver)
+		else if (GameManager.Instance.currentState == GameState.RoundOver)
 		{
 			StartCoroutine (HideRoundOverText ());
 		}
-		else if (OfflineManager.Instance.currentState == GameState.MatchOver)
+		else if (GameManager.Instance.currentState == GameState.MatchOver)
 		{
 			StartCoroutine (HideMatchOverText ());
 		}
@@ -64,13 +64,13 @@ public class OfflineRoundController : MonoBehaviour
 		yield return new WaitForSeconds (3f);
 		//myRoundTextAnim.Play ("Round_Idle");
 		myRoundText.text = "Fight!";
-		OfflineManager.Instance.currentState = GameState.Fight;
+        GameManager.Instance.currentState = GameState.Fight;
 
 		SoundsController.Instance.PlaySoundFX ("Fight", 1.0f);
         
 		yield return new WaitForSeconds (1f);
 		myRoundTextAnim.Play ("Round_Hide");
-		OfflineManager.Instance.currentState = GameState.Playing;
+        GameManager.Instance.currentState = GameState.Playing;
 		SoundsController.Instance.bgMenuMusic.Play ();
 		yield return new WaitForSeconds (1f);
 		gameObject.SetActive (false);

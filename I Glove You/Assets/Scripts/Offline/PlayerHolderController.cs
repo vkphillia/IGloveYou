@@ -70,7 +70,7 @@ public class PlayerHolderController : MonoBehaviour
 
 	void Update ()
 	{
-		if (OfflineManager.Instance.currentState == GameState.Playing)
+		if (GameManager.Instance.currentState == GameState.Playing)
 		{
 			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, -2.7f, 2.7f), Mathf.Clamp (transform.position.y, -3.8f, 3.7f), 0);
 
@@ -97,7 +97,7 @@ public class PlayerHolderController : MonoBehaviour
 			}
 
 		}
-		else if (OfflineManager.Instance.currentState == GameState.MatchOver)
+		else if (GameManager.Instance.currentState == GameState.MatchOver)
 		{
 			if (roundWins == 2)
 			{
@@ -235,7 +235,7 @@ public class PlayerHolderController : MonoBehaviour
 	//increase or decreases the health of the player based on the amount
 	public void AlterHealth (int amount)
 	{
-		if (OfflineManager.Instance.currentState == GameState.Playing)
+		if (GameManager.Instance.currentState == GameState.Playing)
 		{
 			myPooledFT = GameObjectPool.GetPool ("FlyingTextPool").GetInstance ();
 			FT_Obj = myPooledFT.GetComponent<FlyingText> ();

@@ -52,6 +52,9 @@ public class TutorialManager : MonoBehaviour
         
         player.mySpeed = 0;
         player.move = true;
+        GameManager.Instance.currentMode= GameMode.SinglePlayer;
+        GameManager.Instance.currentState = GameState.Playing;
+
         dialougeText.text = "thats how I move";
         player.mySpeed = 4;
         yield return new WaitForSeconds(4f);

@@ -20,24 +20,24 @@ public class PUController : MonoBehaviour
 	{
 		// Table to Store probability of PUS
 		CreateWeightTable ();
-		OfflineManager.SpwanFirstGlove += Spawn;
+        GameManager.SpwanFirstGlove += Spawn;
 	}
 
 	void Start ()
 	{
-		OfflineManager.Instance.PUPicked = true;
+		GameManager.Instance.PUPicked = true;
 
 	}
 
 	void Update ()
 	{
-		if (OfflineManager.Instance.currentState == GameState.Playing)
+		if (GameManager.Instance.currentState == GameState.Playing)
 		{
-			if (OfflineManager.Instance.PUPicked)
+			if (GameManager.Instance.PUPicked)
 			{
 				StartCoroutine (SpawnPUCoroutine ());
 			}
-			if (OfflineManager.Instance.glovePicked)
+			if (GameManager.Instance.glovePicked)
 			{
 				StartCoroutine (SpawnGloveCoroutine ());
 			}
@@ -45,6 +45,7 @@ public class PUController : MonoBehaviour
 		}
 		else
 		{
+            //why???
 			StopCoroutine (SpawnPUCoroutine ());
 			StopCoroutine (SpawnGloveCoroutine ());
 		}
@@ -53,7 +54,7 @@ public class PUController : MonoBehaviour
 	//spawn power ups code
 	public IEnumerator SpawnPUCoroutine ()
 	{
-		OfflineManager.Instance.PUPicked = false;
+        GameManager.Instance.PUPicked = false;
 		int PUIndex = GetPUIndex ();
 		PU = PUList [PUIndex];
 
@@ -118,7 +119,7 @@ public class PUController : MonoBehaviour
 	//spawn gloves code
 	public IEnumerator SpawnGloveCoroutine ()
 	{
-		OfflineManager.Instance.glovePicked = false;
+        GameManager.Instance.glovePicked = false;
 		yield return new WaitForSeconds (7f);
 		SpawnGlove ();
 	}
@@ -127,7 +128,7 @@ public class PUController : MonoBehaviour
 	void Spawn ()
 	{
 		Invoke ("SpawnGlove", 4f);
-		OfflineManager.Instance.glovePicked = false;
+        GameManager.Instance.glovePicked = false;
 	}
 
 
@@ -154,7 +155,7 @@ public class PUController : MonoBehaviour
 
 	void OnDestroy ()
 	{
-		OfflineManager.SpwanFirstGlove -= Spawn;
+		GameManager.SpwanFirstGlove -= Spawn;
 	}
 
 

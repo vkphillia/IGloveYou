@@ -1,25 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-
-
-public delegate void GloveEvent ();
-public enum GameState
-{
-	RoundStart,
-	Fight,
-	Playing,
-	Paused,
-	RoundOver,
-	MatchOver}
-;
 
 public class OfflineManager : MonoBehaviour
 {
-	public static event GloveEvent SpwanFirstGlove;
-	
 	//Static Singleton Instance
 	public static OfflineManager _Instance = null;
 
@@ -36,11 +20,6 @@ public class OfflineManager : MonoBehaviour
 	}
 
 	public bool Mute;
-	//public AudioSource source_Punch;
-	//public AudioSource source_RoundStart;
-	//public AudioSource source_Fight;
-	//public AudioSource source_Round;
-	//public AudioSource[] source_RoundNumber;
 	
 	//scripts link
 	public PlayerHolderController PlayerHolder1;
@@ -54,10 +33,10 @@ public class OfflineManager : MonoBehaviour
 
 	public Transform foreground;
 
-	public GameState currentState;
+	//public  GameState currentState;
     
-	public bool glovePicked;
-	public bool PUPicked;
+//	public bool glovePicked;
+	//public bool PUPicked;
 
 	public int roundNumber;
 	public int MaxHealth;
@@ -90,11 +69,11 @@ public class OfflineManager : MonoBehaviour
 
 
 
-	//sets GameState to RoundStart and sets the sprite for both player
-	void OnEnable ()
+    //sets GameState to RoundStart and sets the sprite for both player
+    void OnEnable ()
 	{
-		currentState = GameState.RoundStart;
-		//why we need this when we know that there are 2 players and we have 2 sprites
+        GameManager.Instance.currentState = GameState.RoundStart;
+		
 		PlayerHolder1.GetComponent<SpriteRenderer> ().sprite = PlayerHolder1.mySprites [OfflineMenuController.Player1CharacterID];
 		//Debug.Log (OfflineMenuController.Player1CharacterID);
 		PlayerHolder2.GetComponent<SpriteRenderer> ().sprite = PlayerHolder2.mySprites [OfflineMenuController.Player2CharacterID];
@@ -129,7 +108,7 @@ public class OfflineManager : MonoBehaviour
 	//check for escape button click, spawn gloves and power ups, controls timer, checks round status
 	void Update ()
 	{
-
+        //no need of pause while fighting
 		//commenting this coz it gets too frustrating while playing
 		/*if (Input.GetKeyDown (KeyCode.Escape))
 		{
@@ -148,7 +127,7 @@ public class OfflineManager : MonoBehaviour
 			}
 		}*/
 		
-		if (currentState == GameState.Playing)
+		if (GameManager.Instance.currentState == GameState.Playing)
 		{
 			
 
@@ -165,17 +144,17 @@ public class OfflineManager : MonoBehaviour
 				CheckRoundStatus ();
 			}*/
 		}
-		else if (currentState == GameState.Fight)
+		else if (GameManager.Instance.currentState == GameState.Fight)
 		{
 			ZoomIn ();
 		}
-		else if (currentState == GameState.RoundOver || currentState == GameState.MatchOver)
+		else if (GameManager.Instance.currentState == GameState.RoundOver || GameManager.Instance.currentState == GameState.MatchOver)
 		{
 			
 			ZoomOut ();
 			myPUController.glove.SetActive (false);
 			myPUController.PU.SetActive (false);
-			PUPicked = true;
+			GameManager.Instance.PUPicked = true;
 			if (P1Ready && P2Ready)
 			{
 				P1Ready = false;
@@ -249,13 +228,13 @@ public class OfflineManager : MonoBehaviour
 		
 		if (PlayerHolder1.roundWins == 2 || PlayerHolder2.roundWins == 2)
 		{
-			currentState = GameState.MatchOver;
+            GameManager.Instance.currentState = GameState.MatchOver;
 		}
 		else
 		{
-			if (currentState != GameState.MatchOver)
+			if (GameManager.Instance.currentState != GameState.MatchOver)
 			{
-				currentState = GameState.RoundOver;
+                GameManager.Instance.currentState = GameState.RoundOver;
 			}
 		}
 		
@@ -279,26 +258,11 @@ public class OfflineManager : MonoBehaviour
 
 		//roundText_HUD.text = "Round: " + OfflineManager.Instance.roundNumber;
 
-		//some new codes here for BGColor, do we need this change?? it will be difficult to match all sprites with the bg color
-		//okay lets leave the code till we get the assets
-		if (this.roundNumber == 2)
-		{
-			//Camera.main.backgroundColor = Color.cyan;
-			//cameraBGcolor = Camera.main.backgroundColor;
-		}
-		if (roundNumber == 3)
-		{
-			//Camera.main.backgroundColor = Color.grey;
-			//cameraBGcolor = Camera.main.backgroundColor;
-		}
-		//till here
-
-		if (SpwanFirstGlove != null)
-		{
-			SpwanFirstGlove ();
-		}
-
-
+        //if (GameManager.SpwanFirstGlove != null)
+        //{
+        //          GameManager.SpwanFirstGlove();
+        //}
+        GameManager.Instance.NewRound();
 	}
     
 	//sets the roundWins to 0 for both player
