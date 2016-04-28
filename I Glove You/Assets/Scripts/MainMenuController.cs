@@ -14,10 +14,8 @@ public class MainMenuController : MonoBehaviour
 	public static MainMenuController _Instance = null;
 
 	//property to get instance
-	public static MainMenuController Instance
-    {
-		get
-        {
+	public static MainMenuController Instance {
+		get {
 			//if we do not have Instance yet
 			if (_Instance == null)
 			{
@@ -29,49 +27,49 @@ public class MainMenuController : MonoBehaviour
 
 	private AsyncOperation async;
 
-    void Start()
-    {
-        StartCoroutine(LoadingMyScene());
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            back = true;
-            backText.gameObject.SetActive(true);
-            StartCoroutine(ChkForDoubleBack());
-        }
-    }
-
-    public void Offline ()
+	void Start ()
 	{
-        GameManager.Instance.currentMode = GameMode.TwoPlayer;
+		StartCoroutine (LoadingMyScene ());
+	}
 
-        StartCoroutine (LoadingScene ("offline menu"));
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.Escape))
+		{
+			back = true;
+			backText.gameObject.SetActive (true);
+			StartCoroutine (ChkForDoubleBack ());
+		}
+	}
+
+	public void Offline ()
+	{
+		GameManager.Instance.currentMode = GameMode.TwoPlayer;
+
+		StartCoroutine (LoadingScene ("offline menu"));
 	}
 
 	public void Story ()
 	{
-        GameManager.Instance.currentMode = GameMode.SinglePlayer;
+		GameManager.Instance.currentMode = GameMode.SinglePlayer;
 
-        StartCoroutine (LoadingScene ("story main"));
+		StartCoroutine (LoadingScene ("story main"));
        
 	}
 
-    IEnumerator LoadingMyScene()
-    {
-        yield return new WaitForSeconds(0.5f);
-        float speed = 1;
+	IEnumerator LoadingMyScene ()
+	{
+		yield return new WaitForSeconds (0.5f);
+		float speed = 1;
 
-        while (canvas.alpha < 1)
-        {
-            canvas.alpha += speed * Time.deltaTime;
-            yield return null;
-        }
-    }
+		while (canvas.alpha < 1)
+		{
+			canvas.alpha += speed * Time.deltaTime;
+			yield return null;
+		}
+	}
 
-    IEnumerator LoadingScene (string sceneName)
+	IEnumerator LoadingScene (string sceneName)
 	{
 		float speed = 1;
         
@@ -82,7 +80,7 @@ public class MainMenuController : MonoBehaviour
 		}
 		SceneManager.LoadScene (sceneName);
 	}
-    
+
 	IEnumerator ChkForDoubleBack ()
 	{
 		if (Input.GetKeyDown (KeyCode.Escape) && back)

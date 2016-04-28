@@ -17,6 +17,8 @@ public class WalkingBombPU : PowerUp
 
 	public override void OnEnable ()
 	{
+		blasted = false;
+		active = false;
 		GetComponent<SpriteRenderer> ().enabled = true;
 		GetComponent<CircleCollider2D> ().enabled = true;
 		myBlastCol.GetComponent<SpriteRenderer> ().enabled = false;

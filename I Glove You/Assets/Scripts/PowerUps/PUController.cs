@@ -18,84 +18,85 @@ public class PUController : MonoBehaviour
 
 	void Awake ()
 	{
-        if(GameManager.Instance.currentMode== GameMode.TwoPlayer)
-        {   
-            GameManager.SpwanFirstGlove += Spawn;
-        }
+		if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+		{   
+			GameManager.SpwanFirstGlove += Spawn;
+		}
 
-        //common for both mode
-        // Table to Store probability of PUS
-        CreateWeightTable();
-    }
+		//common for both mode
+		// Table to Store probability of PUS
+		CreateWeightTable ();
+	}
 
 	void Start ()
 	{
-        if(GameManager.Instance.currentMode== GameMode.TwoPlayer)
-        {
-            GameManager.Instance.PUPicked = true;
-        }
+		if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+		{
+			GameManager.Instance.PUPicked = true;
+            
+		}
         //single player mode
-        else if(GameManager.Instance.currentMode==GameMode.SinglePlayer)
-        {
-            if (Challenge.Instance.PUOn)
-            {
-                GameManager.Instance.PUPicked = true;
-            }
-            else
-            {
-                GameManager.Instance.PUPicked = false;
-            }
+        else if (GameManager.Instance.currentMode == GameMode.SinglePlayer)
+		{
+			if (Challenge.Instance.PUOn)
+			{
+				GameManager.Instance.PUPicked = true;
+			}
+			else
+			{
+				GameManager.Instance.PUPicked = false;
+			}
 
 
-            //Ensure no gloves are spawned if GloveOff
-            if (Challenge.Instance.GloveOn)
-            {
-                GameManager.SpwanFirstGlove += Spawn;
-            }
-            else
-            {
-                GameManager.Instance.glovePicked = false;
-            }
-        }
+			//Ensure no gloves are spawned if GloveOff
+			if (Challenge.Instance.GloveOn)
+			{
+				GameManager.SpwanFirstGlove += Spawn;
+			}
+			else
+			{
+				GameManager.Instance.glovePicked = false;
+			}
+		}
 
 	}
 
 	void Update ()
 	{
-        if(GameManager.Instance.currentMode==GameMode.TwoPlayer)
-        {
-            if (GameManager.Instance.currentState == GameState.Playing)
-            {
-                if (GameManager.Instance.PUPicked)
-                {
-                    StartCoroutine(SpawnPUCoroutine());
-                }
-                if (GameManager.Instance.glovePicked)
-                {
-                    StartCoroutine(SpawnGloveCoroutine());
-                }
+		if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+		{
+			if (GameManager.Instance.currentState == GameState.Playing)
+			{
+				if (GameManager.Instance.PUPicked)
+				{
+					StartCoroutine (SpawnPUCoroutine ());
+				}
+				if (GameManager.Instance.glovePicked)
+				{
+					StartCoroutine (SpawnGloveCoroutine ());
+				}
 
-            }
-        }
+			}
+		}
         //single player mode code
-        else if(GameManager.Instance.currentMode == GameMode.SinglePlayer)
-        {
-            if (GameTimer.Instance.timerStarted)
-            {
-                if (GameManager.Instance.PUPicked)
-                {
-                    StartCoroutine(SpawnPUCoroutine());
-                }
-                if (GameManager.Instance.glovePicked)
-                {
-                    StartCoroutine(SpawnGloveCoroutine());
-                }
-            }
-        }
+        else if (GameManager.Instance.currentMode == GameMode.SinglePlayer)
+		{
+			if (GameTimer.Instance.timerStarted)
+			{
+				if (GameManager.Instance.PUPicked)
+				{
+					StartCoroutine (SpawnPUCoroutine ());
+				}
+				if (GameManager.Instance.glovePicked)
+				{
+					StartCoroutine (SpawnGloveCoroutine ());
+				}
+			}
+		}
 		
 		//else
 		//{
-  //          //why???
+		//          //why???
 		//	StopCoroutine (SpawnPUCoroutine ());
 		//	StopCoroutine (SpawnGloveCoroutine ());
 		//}
@@ -104,12 +105,14 @@ public class PUController : MonoBehaviour
 	//spawn power ups code
 	public IEnumerator SpawnPUCoroutine ()
 	{
-        GameManager.Instance.PUPicked = false;
+		GameManager.Instance.PUPicked = false;
 		int PUIndex = GetPUIndex ();
 		PU = PUList [PUIndex];
 
 		yield return new WaitForSeconds (2f);
 		PU.SetActive (true);
+		Console.Log (PU.name.ToString ());
+		Console.Log (PU.activeInHierarchy.ToString ());
 		SpawnAnything (PU);
 	}
 
@@ -169,7 +172,7 @@ public class PUController : MonoBehaviour
 	//spawn gloves code
 	public IEnumerator SpawnGloveCoroutine ()
 	{
-        GameManager.Instance.glovePicked = false;
+		GameManager.Instance.glovePicked = false;
 		yield return new WaitForSeconds (7f);
 		SpawnGlove ();
 	}
@@ -178,7 +181,7 @@ public class PUController : MonoBehaviour
 	void Spawn ()
 	{
 		Invoke ("SpawnGlove", 4f);
-        GameManager.Instance.glovePicked = false;
+		GameManager.Instance.glovePicked = false;
 	}
 
 
@@ -192,6 +195,7 @@ public class PUController : MonoBehaviour
 		spawnObj.transform.position = spawnPointsArr [_randomPos].position;
 		spawnPointsArrTemp.Add (spawnPointsArr [_randomPos]);
 		spawnPointsArr.RemoveAt (_randomPos);
+
 	}
 
 	//resize both spawn point array after every 5 seconds
@@ -207,9 +211,4 @@ public class PUController : MonoBehaviour
 	{
 		GameManager.SpwanFirstGlove -= Spawn;
 	}
-
-
-
-
-
 }
