@@ -18,32 +18,34 @@ public class GloveController : MonoBehaviour
 
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.layer == 8 && !OfflineManager.Instance.PlayerHolder1.hasGlove)
+		if (other.gameObject.layer == 8)
 		{
-			OfflineManager.Instance.PlayerHolder1.AddGlove ();
-			OfflineManager.Instance.PlayerHolder2.LoseGlove ();
+			if (!GameManager.Instance.players [0].hasGlove)
+			{
+				GameManager.Instance.players [0].AddGlove ();
+				GameManager.Instance.players [1].LoseGlove ();
+			}
+			else
+			{
+				GameManager.Instance.players [0].PunchPUS (this.transform);
+			}	
 
-            GameManager.Instance.glovePicked = true;
-			gameObject.SetActive (false);
-		}
-		else if (other.gameObject.layer == 10 && !OfflineManager.Instance.PlayerHolder2.hasGlove)
-		{
-			OfflineManager.Instance.PlayerHolder1.LoseGlove ();
-			OfflineManager.Instance.PlayerHolder2.AddGlove ();
-
-            GameManager.Instance.glovePicked = true;
+			GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 		else if (other.gameObject.layer == 9)
 		{
-			OfflineManager.Instance.PlayerHolder1.PunchPUS (this.transform);
-            GameManager.Instance.glovePicked = true;
-			gameObject.SetActive (false);
-		}
-		else if (other.gameObject.layer == 11)
-		{
-			OfflineManager.Instance.PlayerHolder2.PunchPUS (this.transform);
-            GameManager.Instance.glovePicked = true;
+			if (!GameManager.Instance.players [1].hasGlove)
+			{
+				GameManager.Instance.players [1].AddGlove ();
+				GameManager.Instance.players [0].LoseGlove ();
+			}
+			else
+			{
+				GameManager.Instance.players [1].PunchPUS (this.transform);
+			}	
+
+			GameManager.Instance.glovePicked = true;
 			gameObject.SetActive (false);
 		}
 	}

@@ -17,14 +17,14 @@ public class SpeedDown : PowerUp
 	{
 		myPS.gameObject.SetActive (false);
 
-		StartCoroutine (SpeedDrain (OfflineManager.Instance.PlayerHolder2));
+		StartCoroutine (SpeedDrain (GameManager.Instance.players [1]));
 	}
 
 	public override void Player2Picked ()
 	{
 		myPS.gameObject.SetActive (false);
 
-		StartCoroutine (SpeedDrain (OfflineManager.Instance.PlayerHolder1));
+		StartCoroutine (SpeedDrain (GameManager.Instance.players [0]));
 	}
 
 	//reduce speed of the other player

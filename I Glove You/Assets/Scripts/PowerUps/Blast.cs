@@ -7,23 +7,23 @@ public class Blast : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if ((other.gameObject.layer == 8 && OfflineManager.Instance.PlayerHolder1.hasGlove))
+		if ((other.gameObject.layer == 8 && GameManager.Instance.players [0].hasGlove))
 		{
 			Debug.Log ("GotBombed");
-			OfflineManager.Instance.PlayerHolder1.getPunched (this.transform);
-			OfflineManager.Instance.PlayerHolder1.AlterHealth (myParentPU.damage);
+			GameManager.Instance.players [0].getPunched (this.transform);
+			GameManager.Instance.players [0].AlterHealth (myParentPU.damage);
 			//OfflineManager.Instance.PlayerHolder1.CheckForRoundOver (OfflineManager.Instance.PlayerHolder2.transform);
-			OfflineManager.Instance.PlayerHolder1.LoseGlove ();
-			OfflineManager.Instance.PlayerHolder2.AddGlove ();
+			GameManager.Instance.players [0].LoseGlove ();
+			GameManager.Instance.players [1].AddGlove ();
 		}
-		else if ((other.gameObject.layer == 10 && OfflineManager.Instance.PlayerHolder2.hasGlove))
+		else if ((other.gameObject.layer == 9 && GameManager.Instance.players [1].hasGlove))
 		{
 			Debug.Log ("GotBombed");
-			OfflineManager.Instance.PlayerHolder2.getPunched (this.transform);
-			OfflineManager.Instance.PlayerHolder2.AlterHealth (myParentPU.damage);
+			GameManager.Instance.players [1].getPunched (this.transform);
+			GameManager.Instance.players [1].AlterHealth (myParentPU.damage);
 			//OfflineManager.Instance.PlayerHolder2.CheckForRoundOver (OfflineManager.Instance.PlayerHolder1.transform);
-			OfflineManager.Instance.PlayerHolder1.AddGlove ();
-			OfflineManager.Instance.PlayerHolder2.LoseGlove ();
+			GameManager.Instance.players [0].AddGlove ();
+			GameManager.Instance.players [1].LoseGlove ();
 		}
 	}
 }

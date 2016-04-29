@@ -50,7 +50,7 @@ public class WalkingBombPU : PowerUp
 		{
 			myPS.gameObject.SetActive (false);
 			active = true;
-			StartCoroutine (ActivateBomb (OfflineManager.Instance.PlayerHolder1));
+			StartCoroutine (ActivateBomb (GameManager.Instance.players [0]));
 		}
 	}
 
@@ -60,7 +60,7 @@ public class WalkingBombPU : PowerUp
 		{
 			myPS.gameObject.SetActive (false);
 			active = true;
-			StartCoroutine (ActivateBomb (OfflineManager.Instance.PlayerHolder2));
+			StartCoroutine (ActivateBomb (GameManager.Instance.players [1]));
 		}
 	}
 
@@ -69,7 +69,7 @@ public class WalkingBombPU : PowerUp
 	{
 		if (!active)
 		{
-			OfflineManager.Instance.PlayerHolder1.PunchPUS (this.transform);
+			GameManager.Instance.players [0].PunchPUS (this.transform);
 			DeactivatePU ();
 		}
 	}
@@ -78,7 +78,7 @@ public class WalkingBombPU : PowerUp
 	{
 		if (!active)
 		{
-			OfflineManager.Instance.PlayerHolder2.PunchPUS (this.transform);
+			GameManager.Instance.players [1].PunchPUS (this.transform);
 			DeactivatePU ();
 		}
 	}
@@ -132,13 +132,13 @@ public class WalkingBombPU : PowerUp
 	{
 		
 		//Find playr with GLove and follow
-		if (OfflineManager.Instance.PlayerHolder1.hasGlove)
+		if (GameManager.Instance.players [0].hasGlove)
 		{
-			EnemyPos = Camera.main.WorldToScreenPoint (OfflineManager.Instance.PlayerHolder1.transform.position);
+			EnemyPos = Camera.main.WorldToScreenPoint (GameManager.Instance.players [0].transform.position);
 		}
-		else if (OfflineManager.Instance.PlayerHolder2.hasGlove)
+		else if (GameManager.Instance.players [1].hasGlove)
 		{
-			EnemyPos = Camera.main.WorldToScreenPoint (OfflineManager.Instance.PlayerHolder2.transform.position);
+			EnemyPos = Camera.main.WorldToScreenPoint (GameManager.Instance.players [1].transform.position);
 		}
 	
 		myPos = Camera.main.WorldToScreenPoint (this.transform.position);

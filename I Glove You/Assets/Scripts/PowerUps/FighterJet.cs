@@ -25,7 +25,7 @@ public class FighterJet : MonoBehaviour
 	{
 		//Find distance to target
 
-		targetPos = Camera.main.WorldToScreenPoint (OfflineManager.Instance.PlayerHolder1.transform.position);
+		targetPos = Camera.main.WorldToScreenPoint (GameManager.Instance.players [0].transform.position);
 		myPos = Camera.main.WorldToScreenPoint (this.transform.position);
 		relativePos = targetPos - myPos;
 

@@ -28,7 +28,7 @@ public class P2Trophy : MonoBehaviour
 
 	void DestoryGO ()
 	{
-		OfflineManager.Instance.PlayerHolder2.myWinText_HUD.text = OfflineManager.Instance.PlayerHolder2.roundWins.ToString ();
+		//OfflineManager.Instance.PlayerHolder2.myWinText_HUD.text = OfflineManager.Instance.PlayerHolder2.roundWins.ToString ();
 		SoundsController.Instance.PlaySoundFX ("CollectPoint", 0.5f);
 		myAnim.Play ("Trophy_Idle");
 		gameObject.SetActive (false);

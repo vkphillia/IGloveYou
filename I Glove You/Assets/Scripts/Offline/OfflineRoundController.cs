@@ -64,13 +64,13 @@ public class OfflineRoundController : MonoBehaviour
 		yield return new WaitForSeconds (3f);
 		//myRoundTextAnim.Play ("Round_Idle");
 		myRoundText.text = "Fight!";
-        GameManager.Instance.currentState = GameState.Fight;
+		GameManager.Instance.currentState = GameState.Fight;
 
 		SoundsController.Instance.PlaySoundFX ("Fight", 1.0f);
         
 		yield return new WaitForSeconds (1f);
 		myRoundTextAnim.Play ("Round_Hide");
-        GameManager.Instance.currentState = GameState.Playing;
+		GameManager.Instance.currentState = GameState.Playing;
 		SoundsController.Instance.bgMenuMusic.Play ();
 		yield return new WaitForSeconds (1f);
 		gameObject.SetActive (false);
@@ -101,12 +101,12 @@ public class OfflineRoundController : MonoBehaviour
 		SoundsController.Instance.PlaySoundFX ("Win", 1.0f);
 		P1Text.gameObject.SetActive (true);
 		P2Text.gameObject.SetActive (true);
-		if (OfflineManager.Instance.PlayerHolder1.roundWins == 2)
+		if (GameManager.Instance.players [0].roundWins == 2)
 		{
 			
 
 
-			if (OfflineManager.Instance.PlayerHolder1.myHealth == OfflineManager.Instance.MaxHealth)
+			if (GameManager.Instance.players [0].myHealth == OfflineManager.Instance.MaxHealth)
 			{
 				P1Text.text = "You Win \n Flawless Victory!";
 				P2Text.text = "You Lose";
@@ -118,10 +118,10 @@ public class OfflineRoundController : MonoBehaviour
 			}
 
 		}
-		else if (OfflineManager.Instance.PlayerHolder2.roundWins == 2)
+		else if (GameManager.Instance.players [1].roundWins == 2)
 		{
 
-			if (OfflineManager.Instance.PlayerHolder2.myHealth == OfflineManager.Instance.MaxHealth)
+			if (GameManager.Instance.players [1].myHealth == OfflineManager.Instance.MaxHealth)
 			{
 				P2Text.text = "You Win \n Flawless Victory!";
 				P1Text.text = "You Lose";

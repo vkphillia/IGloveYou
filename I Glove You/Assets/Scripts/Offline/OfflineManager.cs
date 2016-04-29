@@ -2,8 +2,10 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public delegate void SpawnPlayers ();
 public class OfflineManager : MonoBehaviour
 {
+
 	//Static Singleton Instance
 	public static OfflineManager _Instance = null;
 
@@ -19,11 +21,14 @@ public class OfflineManager : MonoBehaviour
 		}	
 	}
 
+	public static event SpawnPlayers spawnPlayers;
+
+
 	public bool Mute;
 	
 	//scripts link
-	public PlayerHolderController PlayerHolder1;
-	public PlayerHolderController PlayerHolder2;
+	//public PlayerHolderController PlayerHolder1;
+	//public PlayerHolderController PlayerHolder2;
 	public OfflineRoundController RoundPanel;
 
 
@@ -35,7 +40,7 @@ public class OfflineManager : MonoBehaviour
 
 	//public  GameState currentState;
     
-//	public bool glovePicked;
+	//	public bool glovePicked;
 	//public bool PUPicked;
 
 	public int roundNumber;
@@ -68,16 +73,28 @@ public class OfflineManager : MonoBehaviour
 	public GameObject pauseBtn;
 
 
+	//player ui stuff
+	public Image[] healthBars;
+	public Transform[] flyingTextSpawnPoint;
+	public Text[] winText_HUD;
+	public Text[] healthText_HUD;
+	public Sprite[] punchSprites;
 
-    //sets GameState to RoundStart and sets the sprite for both player
-    void OnEnable ()
+
+	//sets GameState to RoundStart and sets the sprite for both player
+	void OnEnable ()
 	{
-        GameManager.Instance.currentState = GameState.RoundStart;
-		
-		PlayerHolder1.GetComponent<SpriteRenderer> ().sprite = PlayerHolder1.mySprites [OfflineMenuController.Player1CharacterID];
-		//Debug.Log (OfflineMenuController.Player1CharacterID);
-		PlayerHolder2.GetComponent<SpriteRenderer> ().sprite = PlayerHolder2.mySprites [OfflineMenuController.Player2CharacterID];
-		//Debug.Log (OfflineMenuController.Player2CharacterID);
+		//tells GameManager to spawn players
+		if (spawnPlayers != null)
+		{
+			spawnPlayers ();
+		}
+
+		GameManager.Instance.currentState = GameState.RoundStart;
+
+		GameManager.Instance.players [0].GetComponent<SpriteRenderer> ().sprite = GameManager.Instance.players [0].mySprites [OfflineMenuController.Player1CharacterID];
+		GameManager.Instance.players [1].GetComponent<SpriteRenderer> ().sprite = GameManager.Instance.players [1].mySprites [OfflineMenuController.Player2CharacterID];
+
 
 	}
 
@@ -86,17 +103,7 @@ public class OfflineManager : MonoBehaviour
 	//sets the player intital position and calls ShowRoundPanel()
 	void Start ()
 	{
-        SoundsController.Instance.PlayCrowdSound();
-
-        P1ReadtText.text = "Re-Match";
-		P2ReadtText.text = "Re-Match";
-
-
-		//really need it? never used anywhere else
-		P1StartPos = new Vector3 (0, -3, 0);
-		P2StartPos = new Vector3 (0, 3, 0);
-		PlayerHolder1.transform.position = P1StartPos;
-		PlayerHolder2.transform.position = P2StartPos;
+		SoundsController.Instance.PlayCrowdSound ();
 
 		//foreground.transform.localScale = new Vector3 (.8f, 0.8f, 1);
         
@@ -108,43 +115,9 @@ public class OfflineManager : MonoBehaviour
 	//check for escape button click, spawn gloves and power ups, controls timer, checks round status
 	void Update ()
 	{
-        //no need of pause while fighting
-		//commenting this coz it gets too frustrating while playing
-		/*if (Input.GetKeyDown (KeyCode.Escape))
-		{
-			if (!Pause)
-			{
-				Pause = true;
-				Time.timeScale = 0;
-
-				PauseText.text = "Paused";
-			}
-			else
-			{
-				Pause = false;
-				Time.timeScale = 1;
-				PauseText.text = "";
-			}
-		}*/
 		
-		if (GameManager.Instance.currentState == GameState.Playing)
-		{
-			
 
-			//Timer controller
-			//roundTimer -= Time.deltaTime;
-			//code for timer
-			//GetComponentInChildren<ProgressBar> ().UpdateBar ((int)roundTimer);
-
-			//timerText_HUD.text = roundTimer.ToString ("N0");
-
-			/*if (roundTimer <= 0)
-			{
-				//Times up and round is over
-				CheckRoundStatus ();
-			}*/
-		}
-		else if (GameManager.Instance.currentState == GameState.Fight)
+		if (GameManager.Instance.currentState == GameState.Fight)
 		{
 			ZoomIn ();
 		}
@@ -199,42 +172,42 @@ public class OfflineManager : MonoBehaviour
 	//any call for stoping the game should be sent here
 	public void CheckRoundStatus ()
 	{
-		if (PlayerHolder1.myHealth > PlayerHolder2.myHealth)
+		if (GameManager.Instance.players [0].myHealth > GameManager.Instance.players [1].myHealth)
 		{
-			PlayerHolder1.roundWins++;
+			GameManager.Instance.players [0].roundWins++;
 			TrophyP1.gameObject.SetActive (true);
 		}
-		else if (PlayerHolder2.myHealth > PlayerHolder1.myHealth)
+		else if (GameManager.Instance.players [1].myHealth > GameManager.Instance.players [0].myHealth)
 		{
-			PlayerHolder2.roundWins++;
+			GameManager.Instance.players [1].roundWins++;
 			TrophyP2.gameObject.SetActive (true);
 
 		}
-		else if (PlayerHolder2.myHealth == PlayerHolder1.myHealth)
+		else if (GameManager.Instance.players [1].myHealth == GameManager.Instance.players [0].myHealth)
 		{
-			if (PlayerHolder1.hasGlove)
+			if (GameManager.Instance.players [0].hasGlove)
 			{
-				PlayerHolder1.roundWins++;
+				GameManager.Instance.players [0].roundWins++;
 				TrophyP1.gameObject.SetActive (true);
 
 			}
-			else if (PlayerHolder2.hasGlove)
+			else if (GameManager.Instance.players [1].hasGlove)
 			{
-				PlayerHolder2.roundWins++;
+				GameManager.Instance.players [1].roundWins++;
 				TrophyP2.gameObject.SetActive (true);
 
 			}
 		}
 		
-		if (PlayerHolder1.roundWins == 2 || PlayerHolder2.roundWins == 2)
+		if (GameManager.Instance.players [0].roundWins == 2 || GameManager.Instance.players [1].roundWins == 2)
 		{
-            GameManager.Instance.currentState = GameState.MatchOver;
+			GameManager.Instance.currentState = GameState.MatchOver;
 		}
 		else
 		{
 			if (GameManager.Instance.currentState != GameState.MatchOver)
 			{
-                GameManager.Instance.currentState = GameState.RoundOver;
+				GameManager.Instance.currentState = GameState.RoundOver;
 			}
 		}
 		
@@ -248,28 +221,28 @@ public class OfflineManager : MonoBehaviour
 		//code for timer
 		//GetComponentInChildren<ProgressBar> ().SetUpdateBar ((int)roundTimer);
 		roundNumber++;
-		PlayerHolder1.transform.localPosition = new Vector3 (0, -3, 0);
-		PlayerHolder1.transform.rotation = Quaternion.identity;
-		PlayerHolder1.ResetPlayer ();
+		GameManager.Instance.players [0].transform.localPosition = new Vector3 (0, -3, 0);
+		GameManager.Instance.players [0].transform.rotation = Quaternion.identity;
+		GameManager.Instance.players [0].ResetPlayer ();
 
-		PlayerHolder2.transform.localPosition = new Vector3 (0, 3, 0);
-		PlayerHolder2.transform.rotation = Quaternion.Euler (0, 0, 180);
-		PlayerHolder2.ResetPlayer ();
+		GameManager.Instance.players [1].transform.localPosition = new Vector3 (0, 3, 0);
+		GameManager.Instance.players [1].transform.rotation = Quaternion.Euler (0, 0, 180);
+		GameManager.Instance.players [1].ResetPlayer ();
 
 		//roundText_HUD.text = "Round: " + OfflineManager.Instance.roundNumber;
 
-        //if (GameManager.SpwanFirstGlove != null)
-        //{
-        //          GameManager.SpwanFirstGlove();
-        //}
-        GameManager.Instance.NewRound();
+		//if (GameManager.SpwanFirstGlove != null)
+		//{
+		//          GameManager.SpwanFirstGlove();
+		//}
+		GameManager.Instance.NewRound ();
 	}
     
 	//sets the roundWins to 0 for both player
 	public void NewMatchStart ()
 	{
-		PlayerHolder1.roundWins = 0;
-		PlayerHolder2.roundWins = 0;
+		GameManager.Instance.players [0].roundWins = 0;
+		GameManager.Instance.players [1].roundWins = 0;
 	}
 
 	public void OnMenuClick ()

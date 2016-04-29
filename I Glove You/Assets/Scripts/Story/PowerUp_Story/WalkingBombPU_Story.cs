@@ -29,7 +29,7 @@ public class WalkingBombPU_Story : PowerUp
 		}
 	}
 
-	public override void Player1Picked()
+	public override void Player1Picked ()
 	{
 		if (!active)
 		{
@@ -38,7 +38,7 @@ public class WalkingBombPU_Story : PowerUp
 		}
 	}
 
-	public override void Player2Picked()
+	public override void Player2Picked ()
 	{
 		if (!active)
 		{
@@ -116,7 +116,7 @@ public class WalkingBombPU_Story : PowerUp
 		{
 			TargetPos = Camera.main.WorldToScreenPoint (Challenge.Instance.player.transform.position);
 		}
-		else if (OfflineManager.Instance.PlayerHolder2.hasGlove)
+		else if (GameManager.Instance.players [1].hasGlove)
 		{
 			TargetPos = Camera.main.WorldToScreenPoint (Challenge.Instance.enemyHolder.enemy.transform.position);
 		}

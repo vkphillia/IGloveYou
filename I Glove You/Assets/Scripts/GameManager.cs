@@ -18,6 +18,7 @@ public enum GameMode
 ;
 
 public delegate void GloveEvent ();
+public delegate void PlayerSpawn ();
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	public static event GloveEvent SpwanFirstGlove;
+	public static event PlayerSpawn GetPlayerNo;
 
 	public GameState currentState;
 	public GameMode currentMode;
@@ -50,10 +52,15 @@ public class GameManager : MonoBehaviour
 	[HideInInspector]
 	public int ChallengeLevel;
 
+	public PlayerHolderController playerPrefab;
+
+	public PlayerHolderController[] players;
+
 	public ChallengeDetail myChallenge;
 
 	void Awake ()
 	{
+		OfflineManager.spawnPlayers += spawnFighters;
 		PUPicked = true;
 		if (_Instance != null && _Instance != this)
 		{
@@ -72,5 +79,37 @@ public class GameManager : MonoBehaviour
 		{
 			SpwanFirstGlove ();
 		}
+	}
+
+	void spawnFighters ()
+	{
+		players = new PlayerHolderController[2];
+		players [0] = Instantiate (playerPrefab, new Vector3 (0, -3, 0), Quaternion.identity)as PlayerHolderController;
+		players [0].playerNo = 0;
+		players [0].gameObject.layer = 8 + players [0].playerNo;//makes it 8, this will help when we have multie enemies in story
+		players [0].myGloveTrigger.layer = 8 + players [0].playerNo;//makes it 8, this will help when we have multie enemies in story
+
+		Console.Log (players [0].playerNo);
+
+		players [1] = Instantiate (playerPrefab, new Vector3 (0, 3, 0), Quaternion.identity)as PlayerHolderController;
+		players [1].playerNo = 1;
+		players [1].gameObject.layer = 8 + players [1].playerNo; //makes it 9
+		players [1].myGloveTrigger.layer = 8 + players [1].playerNo;//makes it 9, this will help when we have multie enemies in story
+
+		Console.Log (players [1].playerNo);
+
+		//this will tell playermovementController to cache player number
+		if (GetPlayerNo != null)
+		{
+			GetPlayerNo ();
+		}
+
+
+	}
+
+	void OnDestroy ()
+	{
+		OfflineManager.spawnPlayers -= spawnFighters;
+	
 	}
 }

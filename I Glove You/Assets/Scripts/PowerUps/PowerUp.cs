@@ -11,75 +11,65 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void OnEnable ()
 	{
-        //assign it in story mode also
+		//assign it in story mode also
 		myPS.gameObject.SetActive (true);
-
 	}
 
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.layer == 8 )
+		if (other.gameObject.layer == 8)
 		{
-            if(GameManager.Instance.currentMode==GameMode.TwoPlayer)
-            {
-                if(!OfflineManager.Instance.PlayerHolder1.hasGlove)
-                {
-                    Player1Picked();
-                }
-            }
+			if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+			{
+				if (!GameManager.Instance.players [0].hasGlove)
+				{
+					Player1Picked ();
+				}
+				else
+				{
+					Player1WithGlovePicked ();
+				}
+			}
             //single player mode
             else
-            {
-                if (!Challenge.Instance.player.hasGlove)
-                {
-                    Player1Picked();
-                }
-                else if(Challenge.Instance.player.hasGlove)
-                {
-                    Player1WithGlovePicked();
-                }
-            }
-		}
-		else if (other.gameObject.layer == 10)
-		{
-            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
-            {
-                if (!OfflineManager.Instance.PlayerHolder2.hasGlove)
-                {
-                    Player2Picked();
-                }
-            }
-            //single player mode
-            else
-            {
-                if (!Challenge.Instance.enemyHolder.enemy.hasGlove)
-                {
-                    Player2Picked();
-                }
-                else if (Challenge.Instance.player.hasGlove)
-                {
-                    Player2WithGlovePicked();
-                }
-            }
-                
+			{
+				if (!Challenge.Instance.player.hasGlove)
+				{
+					Player1Picked ();
+				}
+				else if (Challenge.Instance.player.hasGlove)
+				{
+					Player1WithGlovePicked ();
+				}
+			}
 		}
 		else if (other.gameObject.layer == 9)
 		{
-            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
-            {
-                Player1WithGlovePicked();
-            }
-		}
-		else if (other.gameObject.layer == 11)
-		{
-            if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
-            {
-                Player2WithGlovePicked();
-            }
+			if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+			{
+				if (!GameManager.Instance.players [1].hasGlove)
+				{
+					Player2Picked ();
+				}
+				else
+				{
+					Player2WithGlovePicked ();
+				}
+			}
+            //single player mode
+            else
+			{
+				if (!Challenge.Instance.enemyHolder.enemy.hasGlove)
+				{
+					Player2Picked ();
+				}
+				else if (Challenge.Instance.player.hasGlove)
+				{
+					Player2WithGlovePicked ();
+				}
+			}
 		}
 	}
-
-
 
 	public virtual void Player1Picked ()
 	{
@@ -93,35 +83,34 @@ public class PowerUp : MonoBehaviour
 
 	public virtual void Player1WithGlovePicked ()
 	{
-        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
-        {
-            OfflineManager.Instance.PlayerHolder1.PunchPUS(this.transform);
-        }
-        else
-        {
-            //Challenge.Instance.player.PunchPUS (this.transform);
-        }
+		if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+		{
+			GameManager.Instance.players [0].PunchPUS (this.transform);
+		}
+		else
+		{
+			//Challenge.Instance.player.PunchPUS (this.transform);
+		}
 
-        DeactivatePU ();
+		DeactivatePU ();
 	}
 
 	public virtual void Player2WithGlovePicked ()
 	{
-        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
-        {
-            OfflineManager.Instance.PlayerHolder2.PunchPUS(this.transform);
-        }
-        else
-        {
-            //Challenge.Instance.enemyHolder.enemy.PunchPUS (this.transform);
-        }
-        DeactivatePU ();
+		if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+		{
+			GameManager.Instance.players [1].PunchPUS (this.transform);
+		}
+		else
+		{
+			//Challenge.Instance.enemyHolder.enemy.PunchPUS (this.transform);
+		}
+		DeactivatePU ();
 	}
 
 	public virtual void DeactivatePU ()
 	{
-
-        GameManager.Instance.PUPicked = true;
+		GameManager.Instance.PUPicked = true;
 		gameObject.SetActive (false);
 	}
 

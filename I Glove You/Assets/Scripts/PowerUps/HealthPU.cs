@@ -7,13 +7,13 @@ public class HealthPU : PowerUp
 
 	public override void Player1Picked ()
 	{
-		OfflineManager.Instance.PlayerHolder1.AlterHealth (HealthUp);
+		GameManager.Instance.players [0].AlterHealth (HealthUp);
 		base.DeactivatePU ();
 	}
 
 	public override void Player2Picked ()
 	{
-		OfflineManager.Instance.PlayerHolder2.AlterHealth (HealthUp);
+		GameManager.Instance.players [1].AlterHealth (HealthUp);
 		base.DeactivatePU ();
 	}
 }
