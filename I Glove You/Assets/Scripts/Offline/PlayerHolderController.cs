@@ -2,10 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-
+public delegate void GlovePickEvent ();
 
 public class PlayerHolderController : MonoBehaviour
 {
+
+	public static event GlovePickEvent removeGlove;
+
 	[HideInInspector]	
 	public bool hit;
 
@@ -125,6 +128,39 @@ public class PlayerHolderController : MonoBehaviour
 				GameManager.Instance.players [0].Punch ();
 			}
 		}
+		else if (other.gameObject.layer == 13) //glove
+		{
+			if (this.gameObject.layer == 8)
+			{
+				if (hasGlove)
+				{
+					GameManager.Instance.players [0].PunchPUS (this.transform);
+				}
+				else
+				{
+					GameManager.Instance.players [0].AddGlove ();
+					GameManager.Instance.players [1].LoseGlove ();
+				}
+			}
+			else if (this.gameObject.layer == 9)
+			{
+				if (hasGlove)
+				{
+					GameManager.Instance.players [1].PunchPUS (this.transform);
+				}
+				else
+				{
+					GameManager.Instance.players [1].AddGlove ();
+					GameManager.Instance.players [0].LoseGlove ();
+				}
+			}
+			//tells the glove controller to remove glove
+			if (removeGlove != null)
+			{
+				removeGlove ();
+			}
+		}
+
 	}
 
 

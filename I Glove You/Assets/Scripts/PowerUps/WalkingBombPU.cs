@@ -24,7 +24,6 @@ public class WalkingBombPU : PowerUp
 		myBlastCol.GetComponent<SpriteRenderer> ().enabled = false;
 		myBlastCol.GetComponent<CircleCollider2D> ().enabled = false;
 		base.OnEnable ();
-
 	}
 
 	void Update ()
