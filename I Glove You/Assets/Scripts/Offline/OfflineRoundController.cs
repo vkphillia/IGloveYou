@@ -105,10 +105,8 @@ public class OfflineRoundController : MonoBehaviour
 		P2Text.gameObject.SetActive (true);
 		if (GameManager.Instance.players [0].roundWins == 2)
 		{
-			
-
-
-			if (GameManager.Instance.players [0].myHealth == OfflineManager.Instance.MaxHealth)
+			//check if health is equal maxHealth
+			if (GameManager.Instance.players [0].myHealth == GameManager.Instance.players[0].MaxHealth)
 			{
 				P1Text.text = "You Win \n Flawless Victory!";
 				P2Text.text = "You Lose";
@@ -123,7 +121,7 @@ public class OfflineRoundController : MonoBehaviour
 		else if (GameManager.Instance.players [1].roundWins == 2)
 		{
 
-			if (GameManager.Instance.players [1].myHealth == OfflineManager.Instance.MaxHealth)
+			if (GameManager.Instance.players [1].myHealth == GameManager.Instance.players[1].MaxHealth)
 			{
 				P2Text.text = "You Win \n Flawless Victory!";
 				P1Text.text = "You Lose";

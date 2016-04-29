@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
 
 	void spawnFighters ()
 	{
+        //a for loop could have been added for this stuff
 		players = new PlayerHolderController[2];
 		players [0] = Instantiate (playerPrefab, new Vector3 (0, -3, 0), Quaternion.identity)as PlayerHolderController;
 		players [0].playerNo = 0;

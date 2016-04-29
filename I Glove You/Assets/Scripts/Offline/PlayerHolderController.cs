@@ -17,8 +17,11 @@ public class PlayerHolderController : MonoBehaviour
 
 	//[HideInInspector]
 	public int myHealth;
-
-	[HideInInspector]
+    public float mySpeed;
+    public int MaxHealth;
+    public float MaxSpeed;
+    
+    [HideInInspector]
 	public int roundWins;
 
 	[HideInInspector]
@@ -29,7 +32,7 @@ public class PlayerHolderController : MonoBehaviour
 
 	private SpriteRenderer mySprite;
 
-	public float mySpeed;
+	
 
 	private Vector3 force;
 	private bool PUHitter;
@@ -59,9 +62,14 @@ public class PlayerHolderController : MonoBehaviour
 	{
 		mySprite = GetComponent<SpriteRenderer> ();
 		myOriginalSprite = mySprite.sprite;
-		myHealth = OfflineManager.Instance.MaxHealth;
-		mySpeed = OfflineManager.Instance.MaxSpeed;
-		OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
+        //should be replaced
+        //done
+		myHealth = MaxHealth;
+		mySpeed = MaxSpeed;
+        UpdateMyUI();
+		//OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
+
+        //why here? allot this during instantiation
 		myPunchSprite = OfflineManager.Instance.punchSprites [playerNo];
 	}
 
@@ -120,7 +128,7 @@ public class PlayerHolderController : MonoBehaviour
 				GameManager.Instance.players [1].Punch ();
 			}
 		}
-		else if (other.gameObject.layer == 8)
+		else if (other.gameObject.layer == 8)//8 is player 1
 		{
 			if (GameManager.Instance.players [0].hasGlove)
 			{
@@ -128,8 +136,9 @@ public class PlayerHolderController : MonoBehaviour
 				GameManager.Instance.players [0].Punch ();
 			}
 		}
-		else if (other.gameObject.layer == 13) //glove
+		else if (other.gameObject.layer == 13) //13 for glove
 		{
+            //both conditions can be merged
 			if (this.gameObject.layer == 8)
 			{
 				if (hasGlove)
@@ -142,8 +151,8 @@ public class PlayerHolderController : MonoBehaviour
 					GameManager.Instance.players [1].LoseGlove ();
 				}
 			}
-			else if (this.gameObject.layer == 9)
-			{
+			else if (this.gameObject.layer == 9)//9 is player 2
+            {
 				if (hasGlove)
 				{
 					GameManager.Instance.players [1].PunchPUS (other.transform);
@@ -190,15 +199,19 @@ public class PlayerHolderController : MonoBehaviour
 		//myWinText_HUD.text = roundWins.ToString ();
 		hit = false;
 		hitter = false;
-		myHealth = OfflineManager.Instance.MaxHealth;
-		OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
-
-		//myHealthText_HUD.text = myHealth.ToString ();
-		myPunchAnim.gameObject.SetActive (false);
-
-		mySpeed = OfflineManager.Instance.MaxSpeed;
+        //can be replaced by gameManager or self
+        //replaced
+		myHealth = MaxHealth;
+        mySpeed = MaxSpeed;
+        //call to reset all UI elements related to this player
+        UpdateMyUI();
+        //OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
+        //OfflineManager.Instance.healthBars [playerNo].fillAmount = 1f;
+        //myHealthText_HUD.text = myHealth.ToString ();
+        myPunchAnim.gameObject.SetActive (false);
+        
 		hasGlove = false;
-		OfflineManager.Instance.healthBars [playerNo].fillAmount = 1f;
+		
 
 	}
 
@@ -269,11 +282,13 @@ public class PlayerHolderController : MonoBehaviour
 	//increase or decreases the health of the player based on the amount
 	public void AlterHealth (int amount)
 	{
+        
 		if (GameManager.Instance.currentState == GameState.Playing)
 		{
 			myPooledFT = GameObjectPool.GetPool ("FlyingTextPool").GetInstance ();
 			FT_Obj = myPooledFT.GetComponent<FlyingText> ();
 			FT_Obj.transform.SetParent (this.transform);
+            //No Idea about it, you can fix this
 			FT_Obj.transform.position = OfflineManager.Instance.flyingTextSpawnPoint [playerNo].position;
 			FT_Obj.transform.rotation = OfflineManager.Instance.flyingTextSpawnPoint [playerNo].rotation;
 			//new health bar
@@ -290,32 +305,30 @@ public class PlayerHolderController : MonoBehaviour
 				FT_Obj.myBlackText.text = amount.ToString ();
 				FT_Obj.myGreenText.text = amount.ToString ();
 			}
-
-			if ((myHealth + amount) > OfflineManager.Instance.MaxHealth)
+            //replaced with its own maxHealth
+			if ((myHealth + amount) > MaxHealth)
 			{
-				myHealth = OfflineManager.Instance.MaxHealth;
-				OfflineManager.Instance.healthBars [playerNo].fillAmount = 1f;
-
-
+				myHealth = MaxHealth;
+                //OfflineManager.Instance.healthBars [playerNo].fillAmount = 1f;
 
 			}
 			else if ((myHealth + amount) <= 0)
 			{
 				myHealth = 0;
-				OfflineManager.Instance.healthBars [playerNo].fillAmount = 0f;
+                //OfflineManager.Instance.healthBars [playerNo].fillAmount = 0f;
 
 
 				//code for checking who wins the round and stops the round
-				OfflineManager.Instance.CheckRoundStatus ();
+				//OfflineManager.Instance.CheckRoundStatus ();
+                CheckGame();
 			}
 			else
 			{
 				myHealth += amount;
-				OfflineManager.Instance.healthBars [playerNo].fillAmount = (float)(myHealth) / OfflineManager.Instance.MaxHealth;
+				//OfflineManager.Instance.healthBars [playerNo].fillAmount = (float)(myHealth) / MaxHealth;
 
-
-				//only play sound when adding health
-				if (amount > 0)
+                //only play sound when adding health
+                if (amount > 0)
 				{
 					SoundsController.Instance.PlaySoundFX ("HealthUp", 0.6f); 
 					StartCoroutine (ChangeColor (Color.green));
@@ -323,22 +336,25 @@ public class PlayerHolderController : MonoBehaviour
 				else
 				{
 					StartCoroutine (ChangeColor (Color.red));
-					StartCoroutine (ChangeHealthBarColor ());
+					//StartCoroutine (ChangeHealthBarColor ());
 				}
 			}
+            //call to update UI elements
+            UpdateMyUI();
+        }
 
-		}
+		//OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
+        
 
-		OfflineManager.Instance.healthText_HUD [playerNo].text = myHealth.ToString ();
-	}
+    }
 
-	IEnumerator ChangeHealthBarColor ()
-	{
-		OfflineManager.Instance.healthBars [playerNo].color = Color.red;
-		yield return new WaitForSeconds (.3f);
-		OfflineManager.Instance.healthBars [playerNo].color = Color.green;
+	//IEnumerator ChangeHealthBarColor ()
+	//{
+	//	OfflineManager.Instance.healthBars [playerNo].color = Color.red;
+	//	yield return new WaitForSeconds (.3f);
+	//	OfflineManager.Instance.healthBars [playerNo].color = Color.green;
 
-	}
+	//}
 
 
 	IEnumerator ChangeColor (Color C)
@@ -365,5 +381,28 @@ public class PlayerHolderController : MonoBehaviour
 		Hit_Obj.transform.rotation = Quaternion.identity;
 	}
 
+    //if needed add more elements into it
+    void UpdateMyUI()
+    {
+        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+        {
+            OfflineManager.Instance.UpdatePlayerUI(playerNo, myHealth, MaxHealth);
+        }
+        else
+        {
+            //story mode call
+        }
+    }
 
+    void CheckGame()
+    {
+        if (GameManager.Instance.currentMode == GameMode.TwoPlayer)
+        {
+            OfflineManager.Instance.CheckRoundStatus();
+        }
+        else
+        {
+            //story mode call
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public delegate void SpawnPlayers ();
 public class OfflineManager : MonoBehaviour
@@ -36,8 +37,8 @@ public class OfflineManager : MonoBehaviour
 	public Transform foreground;
 
 	public int roundNumber;
-	public int MaxHealth;
-	public float MaxSpeed;
+	//public int MaxHealth;
+	//public float MaxSpeed;
   
 	private Vector3 P1StartPos;
 	private Vector3 P2StartPos;
@@ -77,7 +78,7 @@ public class OfflineManager : MonoBehaviour
 		}
 
 		GameManager.Instance.currentState = GameState.RoundStart;
-
+        //why offline manager is doing this?? It should be done by game manager itself
 		GameManager.Instance.players [0].GetComponent<SpriteRenderer> ().sprite = GameManager.Instance.players [0].mySprites [OfflineMenuController.Player1CharacterID];
 		GameManager.Instance.players [1].GetComponent<SpriteRenderer> ().sprite = GameManager.Instance.players [1].mySprites [OfflineMenuController.Player2CharacterID];
 
@@ -125,11 +126,33 @@ public class OfflineManager : MonoBehaviour
 
 	}
 
+    //code for updating UIElements of players
+    //playerHeatlh shold be with offline manager
+    //take reference of both player into offline manager to
+    public void UpdatePlayerUI(int playerNo,int playerHealth,int playerMaxHealth)
+    {
+        float fillAmountTemp = (float)(playerHealth) / playerMaxHealth;
 
+        if (fillAmountTemp< healthBars[playerNo].fillAmount)
+        {
+            StartCoroutine(ChangeHealthBarColor(playerNo));
+        }
 
+        healthBars[playerNo].fillAmount= fillAmountTemp;
+        healthText_HUD[playerNo].text = playerHealth.ToString();
+    }
 
-	//camera zoom code
-	void ZoomIn ()
+    //moved from player to here
+    IEnumerator ChangeHealthBarColor(int playerNo)
+    {
+        healthBars[playerNo].color = Color.red;
+        yield return new WaitForSeconds(.3f);
+        healthBars[playerNo].color = Color.green;
+
+    }
+
+    //camera zoom code
+    void ZoomIn ()
 	{
 		Player1HUDPanel.SetActive (true);
 		Player2HUDPanel.SetActive (true);

@@ -38,7 +38,7 @@ public class SpeedDown : PowerUp
 		p.mySpeed -= SpeedReduction;
 		SoundsController.Instance.PlaySoundFX ("SpeedDown", 0.5f);
 		yield return new WaitForSeconds (myTime);
-		p.mySpeed = OfflineManager.Instance.MaxSpeed;
+		p.mySpeed = p.MaxSpeed;
 		DeactivatePU ();
 	}
 
