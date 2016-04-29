@@ -16,6 +16,7 @@ public class OfflineRoundController : MonoBehaviour
 
 	void OnEnable ()
 	{
+		
 		//SoundsController.Instance.bgMenuMusic.Stop ();
 	}
 
@@ -77,7 +78,8 @@ public class OfflineRoundController : MonoBehaviour
 	}
 
 	public IEnumerator HideRoundOverText ()
-	{	
+	{
+		SoundsController.Instance.walkingBomb.Pause (); 
 		myRoundText.text = "";
 		SoundsController.Instance.PlaySoundFX ("RoundEnd", 1.0f);
 		yield return new WaitForSeconds (.2f);

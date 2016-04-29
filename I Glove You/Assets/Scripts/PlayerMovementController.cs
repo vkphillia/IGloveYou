@@ -88,12 +88,12 @@ public class PlayerMovementController : MonoBehaviour
 
 	void MoveClockWise ()
 	{
-		transform.Rotate (0, 0, 5);
+		transform.Rotate (0, 0, 7);
 	}
 
 	void MoveAntiClockWise ()
 	{
-		transform.Rotate (0, 0, -5);
+		transform.Rotate (0, 0, -7);
 	}
 
 	void getPlayerNo ()

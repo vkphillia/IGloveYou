@@ -134,7 +134,7 @@ public class PlayerHolderController : MonoBehaviour
 			{
 				if (hasGlove)
 				{
-					GameManager.Instance.players [0].PunchPUS (this.transform);
+					GameManager.Instance.players [0].PunchPUS (other.transform);
 				}
 				else
 				{
@@ -146,7 +146,7 @@ public class PlayerHolderController : MonoBehaviour
 			{
 				if (hasGlove)
 				{
-					GameManager.Instance.players [1].PunchPUS (this.transform);
+					GameManager.Instance.players [1].PunchPUS (other.transform);
 				}
 				else
 				{
@@ -160,7 +160,6 @@ public class PlayerHolderController : MonoBehaviour
 				removeGlove ();
 			}
 		}
-
 	}
 
 

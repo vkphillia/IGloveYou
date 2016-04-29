@@ -25,10 +25,7 @@ public class OfflineManager : MonoBehaviour
 
 
 	public bool Mute;
-	
-	//scripts link
-	//public PlayerHolderController PlayerHolder1;
-	//public PlayerHolderController PlayerHolder2;
+
 	public OfflineRoundController RoundPanel;
 
 
@@ -38,23 +35,12 @@ public class OfflineManager : MonoBehaviour
 
 	public Transform foreground;
 
-	//public  GameState currentState;
-    
-	//	public bool glovePicked;
-	//public bool PUPicked;
-
 	public int roundNumber;
 	public int MaxHealth;
 	public float MaxSpeed;
-    
-	//public float MaxRoundTimer;
-
-	//public Text roundText_HUD;
-	//public Text timerText_HUD;
-	
+  
 	private Vector3 P1StartPos;
 	private Vector3 P2StartPos;
-	//private float roundTimer;
 
 	public bool Pause;
 	public Text PauseText;
@@ -181,7 +167,6 @@ public class OfflineManager : MonoBehaviour
 		{
 			GameManager.Instance.players [1].roundWins++;
 			TrophyP2.gameObject.SetActive (true);
-
 		}
 		else if (GameManager.Instance.players [1].myHealth == GameManager.Instance.players [0].myHealth)
 		{
@@ -189,13 +174,11 @@ public class OfflineManager : MonoBehaviour
 			{
 				GameManager.Instance.players [0].roundWins++;
 				TrophyP1.gameObject.SetActive (true);
-
 			}
 			else if (GameManager.Instance.players [1].hasGlove)
 			{
 				GameManager.Instance.players [1].roundWins++;
 				TrophyP2.gameObject.SetActive (true);
-
 			}
 		}
 		
@@ -217,9 +200,7 @@ public class OfflineManager : MonoBehaviour
 	//sets the players intital positions, timer and calls for SpawnGlove()
 	public void StartNewRound ()
 	{
-		//roundTimer = MaxRoundTimer;
-		//code for timer
-		//GetComponentInChildren<ProgressBar> ().SetUpdateBar ((int)roundTimer);
+		
 		roundNumber++;
 		GameManager.Instance.players [0].transform.localPosition = new Vector3 (0, -3, 0);
 		GameManager.Instance.players [0].transform.rotation = Quaternion.identity;
@@ -229,7 +210,7 @@ public class OfflineManager : MonoBehaviour
 		GameManager.Instance.players [1].transform.rotation = Quaternion.Euler (0, 0, 180);
 		GameManager.Instance.players [1].ResetPlayer ();
 
-		//roundText_HUD.text = "Round: " + OfflineManager.Instance.roundNumber;
+
 
 		//if (GameManager.SpwanFirstGlove != null)
 		//{
@@ -250,20 +231,7 @@ public class OfflineManager : MonoBehaviour
 		SceneManager.LoadScene ("offline menu");
 	}
 
-	public void OnReMatchClickP1 ()
-	{
-		P1Ready = true;
-		P1ReadtText.text = "Ready!";
 
-
-	}
-
-	public void OnReMatchClickP2 ()
-	{
-		P2Ready = true;
-		P2ReadtText.text = "Ready!";
-
-	}
 
 	//plays the sound that is passed in as an argument //Deprecated
 	//public void PlaySound (AudioSource a)

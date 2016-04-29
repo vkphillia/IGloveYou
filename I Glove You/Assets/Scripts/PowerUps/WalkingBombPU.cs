@@ -84,7 +84,7 @@ public class WalkingBombPU : PowerUp
 
 	public IEnumerator ActivateBomb (PlayerHolderController p)
 	{
-		//loop this please until blast
+		
 		SoundsController.Instance.walkingBomb.Play (); 
 		//bomb ticking sound goes here
 

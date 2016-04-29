@@ -23,12 +23,11 @@ public class P2Trophy : MonoBehaviour
 		SoundsController.Instance.PlaySoundFX ("GlovePick", 0.6f);
 		yield return new WaitForSeconds (1f);
 		iTween.MoveTo (this.gameObject, iTween.Hash ("position", new Vector3 (2.3f, 4.3f, -1), "time", 1f, "easetype", "linear", "onComplete", "DestoryGO"));
-
 	}
 
 	void DestoryGO ()
 	{
-		//OfflineManager.Instance.PlayerHolder2.myWinText_HUD.text = OfflineManager.Instance.PlayerHolder2.roundWins.ToString ();
+		OfflineManager.Instance.winText_HUD [1].text = GameManager.Instance.players [1].roundWins.ToString ();
 		SoundsController.Instance.PlaySoundFX ("CollectPoint", 0.5f);
 		myAnim.Play ("Trophy_Idle");
 		gameObject.SetActive (false);
